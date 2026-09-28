@@ -87,6 +87,7 @@ class RoutingConfig:
     region_ratio: float = 1.6
     region_margin_km: float = 60.0
     through_join_max_gap_s: int = 600
+    border_radius_km: float = 30.0
     extra_hubs: tuple[str, ...] = field(default_factory=tuple)
 
 

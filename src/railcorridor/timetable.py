@@ -23,6 +23,7 @@ from railcorridor.labels import derive_label
 from railcorridor.stations import haversine_m
 
 DAY = 86_400
+_DUP_TOLERANCE_S = 300
 
 
 @dataclass
@@ -139,7 +140,9 @@ def load_timetable(
     for f in feeds:
         trips.extend(_feed_trips(con, f, date, idx))
         _apply_transfers(con, f, idx, change)
-    trips = join_through_trips(trips, cfg.through_join_max_gap_s)
+    trips = join_through_trips(
+        trips, cfg.through_join_max_gap_s, near_border(st_rows, cfg.border_radius_km)
+    )
     if regional_only:
         trips = [t for t in trips if not t.long_distance]
     return Timetable(
@@ -261,15 +264,31 @@ def _apply_transfers(
         change[s] = max(60, min(1800, int(statistics.median(vals))))
 
 
-def join_through_trips(trips: list[Trip], max_gap_s: int = 600) -> list[Trip]:
+def near_border(st_rows: list[tuple], radius_km: float) -> set[int]:
+    """Indices of stations within ``radius_km`` of a border point ``(Gr)``."""
+    borders = [(r[2], r[3]) for r in st_rows if "(Gr)" in r[1]]
+    return {
+        i
+        for i, r in enumerate(st_rows)
+        if any(
+            haversine_m(r[2], r[3], la, lo) <= radius_km * 1000 for la, lo in borders
+        )
+    }
+
+
+def join_through_trips(
+    trips: list[Trip], max_gap_s: int = 600, near_border: set[int] | None = None
+) -> list[Trip]:
     """Glue fragments of one physical train into a single trip.
 
     A continues into B when A's last station is served by B (at B's start, or
     mid-way for a copy of the same train in another feed) and B leaves there
     between 3 min before and ``max_gap_s`` after A arrives. Turnarounds (B
     heading back where A came from) never join, and the two must look like
-    one train (see ``_same_train``).
+    one train (see ``_same_train``). ``near_border`` holds station indices
+    close to a border point, where operators hand trains over.
     """
+    near_border = near_border or set()
     by_station: dict[int, list[tuple[int, int]]] = defaultdict(list)
     for bi, b in enumerate(trips):
         for j, s in enumerate(b.stations[:-1]):
@@ -288,7 +307,7 @@ def join_through_trips(trips: list[Trip], max_gap_s: int = 600) -> list[Trip]:
                 continue
             if b.stations[j + 1] == prev:
                 continue  # turnaround
-            if not _same_train(a, b, j):
+            if not _same_train(a, b, j, near_border=s in near_border):
                 continue
             cand = (abs(gap), bi, j)
             if ai not in best or cand < best[ai]:
@@ -319,15 +338,25 @@ def join_through_trips(trips: list[Trip], max_gap_s: int = 600) -> list[Trip]:
     return out
 
 
-def _same_train(a: Trip, b: Trip, j: int) -> bool:
+def _same_train(a: Trip, b: Trip, j: int, *, near_border: bool = False) -> bool:
     """Whether B (entered at its stop ``j``) can be the continuation of A."""
     same_feed = a.feed == b.feed
     if j > 0:
-        return not same_feed  # mid-trip joins only between duplicate feeds
+        # B is a copy of the same train from another feed: it must also call
+        # at one of A's earlier stations at about the same time
+        if same_feed or not (
+            a.label == b.label or (near_border and a.long_distance and b.long_distance)
+        ):
+            return False
+        a_times = dict(zip(a.stations[:-1], a.dep[:-1], strict=True))
+        return any(
+            s in a_times and abs(a_times[s] - d) <= _DUP_TOLERANCE_S
+            for s, d in zip(b.stations[:j], b.dep[:j], strict=True)
+        )
     if a.label == b.label or (same_feed and a.route_id == b.route_id):
         return True
     # e.g. a Czech RJ fragment ending at Děčín, continued as DB line 27
-    return a.long_distance and b.long_distance and a.agency != b.agency
+    return near_border and a.long_distance and b.long_distance and a.agency != b.agency
 
 
 def _concat(

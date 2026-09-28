@@ -9,7 +9,7 @@ Line of stations A - B - C - D - E, 55 km apart, running north.
 * T4  RB3   A 08:30 -> C 11:00                     (weekdays; slow, no change)
 * T5  RE1   C 23:30 -> D 24:40 -> E 25:10          (weekdays; past midnight)
 * T6  RJ    A 06:00 -> B 07:00                     (weekdays; Czech fragment)
-* T7  27    B 07:04 -> E 09:00                     (weekdays; its German part)
+* T7  27    B 07:04 -> border point -> E 09:00     (weekdays; its German part)
 * T8  bus   A 07:00 -> E 07:30                     (weekdays; must be ignored)
 """
 
@@ -21,6 +21,7 @@ from pathlib import Path
 STOPS = {
     "A": ("Alpha Hbf", 50.0),
     "B": ("Beta", 50.5),
+    "G": ("Beta(Gr)", 50.6),
     "C": ("Gamma Hbf", 51.0),
     "D": ("Delta", 51.5),
     "E": ("Epsilon", 52.0),
@@ -39,7 +40,12 @@ TRIPS = [
         [("C", "23:30", "23:30"), ("D", "24:40", "24:41"), ("E", "25:10", "25:10")],
     ),
     ("T6", "R_RJ", "WK", [("A", "06:00", "06:00"), ("B", "07:00", "07:00")]),
-    ("T7", "R_27", "WK", [("B", "07:04", "07:04"), ("E", "09:00", "09:00")]),
+    (
+        "T7",
+        "R_27",
+        "WK",
+        [("B", "07:04", "07:04"), ("G", "07:15", "07:15"), ("E", "09:00", "09:00")],
+    ),
     ("T8", "R_BUS", "WK", [("A", "07:00", "07:00"), ("E", "07:30", "07:30")]),
 ]
 
