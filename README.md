@@ -21,7 +21,7 @@ uv run railcorridor fetch            # data/raw/<feed>_<YYYYMMDD>.zip
 uv run railcorridor build-db         # data/gtfs.duckdb (≈45 s)
 uv run railcorridor query --from "Praha hl.n." --to "Lüneburg" \
     --date 2026-10-06 --depart-window 04:00-11:00 --both-directions
-                                     # out/praha-luneburg/2026-10-06.json (≈1.5 min)
+                                     # out/praha-luneburg/2026-10-06.json (≈35 s on 4 cores)
 uv run railcorridor site             # out/praha-luneburg/index.html
 open out/praha-luneburg/index.html   # or xdg-open; no server needed
 ```
