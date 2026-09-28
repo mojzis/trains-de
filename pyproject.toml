@@ -1,0 +1,163 @@
+[project]
+name = "python-template"
+version = "0.1.0"
+description = "A Python project template"
+requires-python = ">=3.11"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    # aesop toolbox
+    "madoqua",
+    "gerenuk",
+    "biston",
+    "zorilla",
+    "pycoati",
+    "ty-find",
+    # core
+    "ruff",
+    "ty",
+    "pytest",
+    "pytest-cov",
+    "bandit",
+    "vulture",
+    "deptry",
+    "interrogate",
+    "poethepoet",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "DTZ", "T20", "PTH", "ERA", "PL", "TRY", "RUF"]
+
+[tool.ruff.format]
+
+[tool.ty]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+
+[tool.vulture]
+paths = ["src"]
+
+[tool.deptry]
+
+[tool.interrogate]
+fail_under = 0
+
+[tool.madoqua]
+# fix phase keeps the defaults: ruff check --fix, ruff format (re-staged).
+# check phase keeps the defaults (ruff check, ty check) and adds:
+extend_check = [
+    # madoqua appends the staged .py files. biston reads them as --focus-args focus files
+    # (only clone pairs touching a staged file); zorilla lints exactly those files.
+    { name = "biston", cmd = "biston scan --focus-args", timeout_s = 60, max_output_lines = 80 },
+    { name = "zorilla", cmd = "zorilla check", timeout_s = 30, max_output_lines = 80 },
+    # gerenuk scopes itself from the git diff, so no file list.
+    # -o addopts= drops the --cov from [tool.pytest.ini_options]; the hook never reads coverage.
+    { name = "gerenuk", cmd = "gerenuk run -- -q -o addopts=", pass_files = false, timeout_s = 120, max_output_lines = 120 },
+]
+
+[tool.biston.scan]
+exclude = ["**/tests/**"]
+
+[tool.poe]
+verbosity = -1
+
+[tool.poe.tasks.fix]
+sequence = [
+    { cmd = "ruff format --quiet ." },
+    { cmd = "ruff check --fix --quiet ." },
+]
+help = "Auto-fix: format and lint"
+
+[tool.poe.tasks.lint]
+cmd = "ruff check ."
+help = "Run linter (no fix)"
+
+[tool.poe.tasks.typecheck]
+cmd = "ty check"
+help = "Run type checker"
+
+[tool.poe.tasks.test]
+cmd = "pytest -q --tb=short"
+help = "Run tests"
+
+[tool.poe.tasks.security]
+cmd = "bandit -r src -q"
+help = "Security scan (bandit)"
+
+[tool.poe.tasks.vulns]
+shell = "uvx pysentry-rs . || true"
+interpreter = "bash"
+help = "Dependency vulnerability scan"
+
+[tool.poe.tasks.test-lint]
+cmd = "zorilla check ."
+help = "Lint tests for smells (zorilla)"
+
+[tool.poe.tasks.clones]
+cmd = "biston scan ."
+help = "Clone detection (biston)"
+
+[tool.poe.tasks.dead-code]
+cmd = "vulture src"
+help = "Dead code detection"
+
+[tool.poe.tasks.unused-deps]
+cmd = "deptry ."
+help = "Unused dependency check"
+
+[tool.poe.tasks._check-parallel]
+shell = """
+  ruff check . &
+  ty check &
+  bandit -r src -q &
+  zorilla check . &
+  biston scan . &
+  (uvx pysentry-rs . || true) &
+  wait
+"""
+interpreter = "bash"
+
+[tool.poe.tasks.check]
+sequence = [
+    { ref = "_check-parallel" },
+    { ref = "test" },
+]
+help = "Run all checks (parallel where possible)"
+
+[tool.poe.tasks.check-all]
+sequence = [
+    { ref = "lint" },
+    { ref = "typecheck" },
+    { ref = "security" },
+    { ref = "vulns" },
+    { ref = "test-lint" },
+    { ref = "clones" },
+    { ref = "dead-code" },
+    { ref = "unused-deps" },
+    { ref = "test" },
+]
+ignore_fail = true
+help = "Run all checks (report all failures)"
+
+[tool.poe.tasks.setup]
+cmd = "madoqua install"
+help = "Install the madoqua commit hook (sets core.hooksPath)"
