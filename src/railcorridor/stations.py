@@ -18,6 +18,7 @@ from dataclasses import dataclass, field
 import duckdb
 
 from railcorridor.config import HUB_NAMES, MERGE_RADIUS_M
+from railcorridor.load import ident
 
 _EXPAND = [
     (r"\bhl\s*n\b", "hlavni nadrazi"),
@@ -206,7 +207,7 @@ def build_stations(con: duckdb.DuckDBPyConnection, feeds: list[str]) -> int:
     cands: list[Candidate] = []
     to_root: dict[tuple[str, str], str] = {}
     for f in feeds:
-        cs, roots = _candidates(con, f)
+        cs, roots = _candidates(con, ident(f))
         cands.extend(cs)
         to_root.update({(f, s): r for s, r in roots.items()})
     groups = merge_candidates(cands)

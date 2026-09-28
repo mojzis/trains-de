@@ -7,7 +7,6 @@ from importlib import resources
 from pathlib import Path
 
 from jinja2 import Environment, PackageLoader, select_autoescape
-from markupsafe import Markup
 
 from railcorridor.corridors import PALETTE, REGIONAL_COLOR
 
@@ -72,8 +71,9 @@ def build_site(pair_dir: Path) -> Path:
     html = tpl.render(
         title=latest["pair"]["title"],
         corridors=corridors,
-        data_json=Markup(_script_json(bundle)),
-        app_js=Markup(_asset("static/app.js").replace("</script", "<\\/script")),
+        # both are made safe for a <script> body here; the template marks them |safe
+        data_json=_script_json(bundle),
+        app_js=_asset("static/app.js").replace("</script", "<\\/script"),
     )
     out = pair_dir / "index.html"
     out.write_text(html, encoding="utf-8")

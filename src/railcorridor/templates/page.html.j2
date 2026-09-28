@@ -159,9 +159,9 @@ select{font:500 14px var(--body);background:var(--surface);color:var(--ink);bord
 
   <footer class="foot" id="foot"></footer>
 </div>
-<script id="data" type="application/json">{{ data_json }}</script>
+<script id="data" type="application/json">{{ data_json|safe }}</script>
 <script>
-{{ app_js }}
+{{ app_js|safe }}
 </script>
 </body>
 </html>

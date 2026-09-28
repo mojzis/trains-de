@@ -5,11 +5,8 @@ description = "Rail corridor explorer: real train connections between two cities
 requires-python = ">=3.12"
 dependencies = [
     "duckdb>=1.1",
-    "polars>=1.0",
-    "numpy>=1.26",
     "typer>=0.12",
     "jinja2>=3.1",
-    "markupsafe>=2.1",
 ]
 
 [project.scripts]
@@ -70,11 +67,16 @@ show_missing = true
 
 [tool.bandit]
 exclude_dirs = ["tests"]
+# B608: SQL strings interpolate only feed schema names, which load.ident()
+# validates as plain identifiers; values always go through parameters.
+skips = ["B608"]
 
 [tool.vulture]
 paths = ["src"]
+ignore_decorators = ["@app.command"]
 
 [tool.deptry]
+known_first_party = ["railcorridor"]
 
 [tool.interrogate]
 fail_under = 0
@@ -89,7 +91,7 @@ extend_check = [
     { name = "zorilla", cmd = "zorilla check", timeout_s = 30, max_output_lines = 80 },
     # gerenuk scopes itself from the git diff, so no file list.
     # -o addopts= drops the --cov from [tool.pytest.ini_options]; the hook never reads coverage.
-    { name = "gerenuk", cmd = "gerenuk run -- -q -o addopts=", pass_files = false, timeout_s = 120, max_output_lines = 120 },
+    { name = "gerenuk", cmd = "gerenuk run -- -q -o addopts= -m \"not integration\"", pass_files = false, timeout_s = 120, max_output_lines = 120 },
 ]
 
 [tool.biston.scan]
@@ -118,7 +120,7 @@ cmd = "pytest -q --tb=short"
 help = "Run tests"
 
 [tool.poe.tasks.security]
-cmd = "bandit -r src -q"
+cmd = "bandit -c pyproject.toml -r src -q"
 help = "Security scan (bandit)"
 
 [tool.poe.tasks.vulns]
@@ -146,7 +148,7 @@ help = "Unused dependency check"
 shell = """
   ruff check . &
   ty check &
-  bandit -r src -q &
+  bandit -c pyproject.toml -r src -q &
   zorilla check . &
   biston scan . &
   (uvx pysentry-rs . || true) &

@@ -20,6 +20,7 @@ import duckdb
 
 from railcorridor.config import RoutingConfig
 from railcorridor.labels import derive_label
+from railcorridor.load import ident
 from railcorridor.stations import haversine_m
 
 DAY = 86_400
@@ -137,7 +138,7 @@ def load_timetable(
     no_transfer = {i for i, r in enumerate(st_rows) if "(Gr)" in r[1]}
 
     trips: list[Trip] = []
-    for f in feeds:
+    for f in map(ident, feeds):
         trips.extend(_feed_trips(con, f, date, idx))
         _apply_transfers(con, f, idx, change)
     trips = join_through_trips(

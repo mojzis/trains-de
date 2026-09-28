@@ -1,4 +1,4 @@
-# Python Template
+# railcorridor — rail corridor explorer (from the Python template)
 
 ## Commands
 

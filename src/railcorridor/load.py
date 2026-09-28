@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import re
 import tempfile
 import zipfile
 from pathlib import Path
@@ -45,8 +46,17 @@ def _date(c: str) -> str:
     return f"strptime(trim({c}), '%Y%m%d')::DATE"
 
 
+def ident(name: str) -> str:
+    """``name`` if it is a safe SQL identifier (feed schema names), else raise."""
+    if not re.fullmatch(r"[a-z][a-z0-9_]{0,62}", name):
+        msg = f"invalid feed name {name!r}: use lowercase letters, digits, _"
+        raise ValueError(msg)
+    return name
+
+
 def load_feed(con: duckdb.DuckDBPyConnection, name: str, zip_path: Path) -> None:
     """(Re)create schema ``name`` from ``zip_path``, keeping rail only."""
+    ident(name)
     with tempfile.TemporaryDirectory() as tmp:
         with zipfile.ZipFile(zip_path) as zf:
             zf.extractall(tmp)

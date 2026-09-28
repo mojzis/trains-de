@@ -46,10 +46,14 @@ def fetch(
         return target
     raw_dir.mkdir(parents=True, exist_ok=True)
     tmp = target.with_suffix(".part")
+    if not spec.url.startswith("https://"):
+        msg = f"{name}: only https feed URLs are allowed"
+        raise ValueError(msg)
     req = urllib.request.Request(
         spec.url, headers={"User-Agent": "railcorridor/0.1 (+GTFS explorer)"}
     )
-    with urllib.request.urlopen(req, timeout=300) as resp, tmp.open("wb") as fh:
+    # scheme checked above
+    with urllib.request.urlopen(req, timeout=300) as resp, tmp.open("wb") as fh:  # nosec B310
         shutil.copyfileobj(resp, fh, length=1 << 20)
     tmp.replace(target)
     return target
