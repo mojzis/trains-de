@@ -1,8 +1,18 @@
 [project]
-name = "python-template"
+name = "railcorridor"
 version = "0.1.0"
-description = "A Python project template"
-requires-python = ">=3.11"
+description = "Rail corridor explorer: real train connections between two cities from GTFS"
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb>=1.1",
+    "polars>=1.0",
+    "numpy>=1.26",
+    "typer>=0.12",
+    "jinja2>=3.1",
+]
+
+[project.scripts]
+railcorridor = "railcorridor.cli:app"
 
 [build-system]
 requires = ["hatchling"]
@@ -31,10 +41,16 @@ dev = [
 
 [tool.ruff]
 line-length = 88
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "DTZ", "T20", "PTH", "ERA", "PL", "TRY", "RUF"]
+# Routing code is a few deliberately long loops with many knobs; these rules
+# fight that shape more than they help.
+ignore = ["PLR0911", "PLR0912", "PLR0913", "PLR0915", "PLR0917", "PLR2004", "TRY003"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLC0415", "S101"]
 
 [tool.ruff.format]
 
@@ -42,7 +58,8 @@ select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "DTZ", "T20", "PTH", "ERA"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=src --cov-report=term-missing"
+addopts = "--cov=src --cov-report=term-missing -m 'not integration'"
+markers = ["integration: needs downloaded feeds / network (run with -m integration)"]
 
 [tool.coverage.run]
 source = ["src"]

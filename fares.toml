@@ -1,0 +1,25 @@
+# Hand-edited fare notes (GTFS has no prices). Keys under [corridors] are
+# corridor ids as printed by `railcorridor query`. Ranges are rough estimates
+# for 2nd class; always check int.bahn.de / cd.cz for your date.
+
+bahncard_note = "BahnCard 25 takes 25% (BahnCard 50: 50% on Flexpreis, 25% on Sparpreis) off the German share only; the Czech share is full price. Flexpreis figures are estimates for a through ticket in 2nd class. Czech fares at cd.cz can be cheaper for the same train."
+
+[default]
+summary = "Check int.bahn.de"
+note = "No fare estimate for this corridor yet."
+
+[regional]
+summary = "CZ part ~€10–15 + Deutschlandticket"
+note = "German legs are all regional trains, so an existing Deutschlandticket covers them. The Czech part needs its own ticket (cd.cz)."
+
+[corridors.berlin-hamburg]
+summary = "Sparpreis ~€30–60 · Flex ~€140–180"
+note = "One seat Praha → Hamburg on the ComfortJet, then ICE or metronom for 30 min. Reservations are cheap and trains fill up."
+
+[corridors.leipzig-hannover]
+summary = "Sparpreis ~€35–70 · Flex ~€150–190"
+note = "The western route via Leipzig and Magdeburg, then Hannover–Lüneburg. A fallback when Berlin–Hamburg is disrupted or sold out."
+
+[corridors.schwandorf-nurnberg]
+summary = "Praha–Nürnberg ~€20–40 + ICE Spar ~€30–75"
+note = "Praha → Plzeň → Furth im Wald (through train), regional to Nürnberg, then the direct ICE to Lüneburg. Avoids Berlin entirely."
