@@ -171,6 +171,7 @@ def explore(
         grouped,
         ratio=cfg.corridor_ratio,
         slack_min=int(cfg.corridor_slack_hours * 60),
+        pinned=frozenset(e["name"] for e in pair.expected),
     )
     chosen = {
         d: pick_journeys(chosen_corridors, d, cfg.max_journeys) for d in directions

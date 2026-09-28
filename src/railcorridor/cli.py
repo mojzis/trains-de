@@ -22,6 +22,7 @@ from railcorridor.explore import explore, load_pair, parse_window
 from railcorridor.export import build_document, write_json
 from railcorridor.fares import TomlFareProvider
 from railcorridor.load import load_feed, loaded_feeds
+from railcorridor.site import build_site
 from railcorridor.stations import build_stations
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
@@ -123,6 +124,20 @@ def query(
         for m in doc["missing"].get(d, []):
             typer.echo(f"  NOT IN DATA: {m['name']} ({m['reason']})")
     typer.echo(f"wrote {path}")
+
+
+@app.command()
+def site(
+    pair: Annotated[
+        str | None, typer.Argument(help="Pair id, e.g. praha-luneburg (default: all)")
+    ] = None,
+    out: Annotated[Path, typer.Option(help="Output directory")] = OUT_DIR,
+) -> None:
+    """Render out/<pair>/index.html from the JSON files written by query."""
+    dirs = [out / pair] if pair else sorted(p for p in out.iterdir() if p.is_dir())
+    for d in dirs:
+        path = build_site(d)
+        typer.echo(f"wrote {path} ({path.stat().st_size / 1024:.0f} KiB)")
 
 
 if __name__ == "__main__":

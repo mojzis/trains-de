@@ -38,7 +38,7 @@ FEEDS: dict[str, FeedSpec] = {
             attribution="DELFI e.V. / gtfs.de",
             attribution_url="https://gtfs.de",
             notes="ICE/IC/EC plus the Czech legs of some international trains. "
-            "Rolling 30-day window, refreshed daily.",
+            "Rolling ~30-day window.",
         ),
         FeedSpec(
             name="de_rv",
@@ -49,7 +49,7 @@ FEEDS: dict[str, FeedSpec] = {
             attribution_url="https://gtfs.de",
             notes="RE/RB/S-Bahn, and some long-distance lines published as bare "
             "numbers (e.g. line 27 Hamburg-Berlin-Dresden-Praha). "
-            "Rolling 30-day window, refreshed daily.",
+            "Rolling ~30-day window.",
         ),
         FeedSpec(
             name="cz_czptt",

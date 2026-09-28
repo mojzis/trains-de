@@ -71,6 +71,12 @@ class Journey:
         """Number of changes."""
         return len(self.legs) - 1
 
+    @property
+    def min_slack(self) -> int:
+        """Shortest change time in seconds (large when there is no change)."""
+        gaps = [b.dep - a.arr for a, b in zip(self.legs, self.legs[1:], strict=False)]
+        return min(gaps, default=1 << 30)
+
     def signature(self) -> tuple:
         """Identity for de-duplication: times and change stations."""
         return (
@@ -253,6 +259,38 @@ class Network:
             return None
         return Journey(tuple(reversed(legs)))
 
+    def polish(self, j: Journey) -> Journey:
+        """Move each change to the best station both trains serve.
+
+        RAPTOR changes at the first station where the connection works
+        (e.g. Hamburg Dammtor); a hub with more slack (Hamburg Hbf) reaches the
+        same trains and is what a traveller would pick. Times stay the same.
+        """
+        tt = self.tt
+        legs = list(j.legs)
+        for k in range(len(legs) - 1):
+            a, b = legs[k], legs[k + 1]
+            b_pos = {s: i for i, s in enumerate(b.trip.stations[: b.alight])}
+            best: tuple | None = None
+            for pa in range(a.board + 1, len(a.trip.stations)):
+                s = a.trip.stations[pa]
+                pb = b_pos.get(s)
+                if pb is None or not a.trip.alight[pa] or not b.trip.board[pb]:
+                    continue
+                if s in tt.no_transfer:
+                    continue
+                slack = b.trip.dep[pb] - a.trip.arr[pa] - tt.change_s[s]
+                if slack < 0:
+                    continue
+                score = (tt.hub[s], slack, pa, pb)
+                if best is None or score > best[0]:
+                    best = (score, pa, pb)
+            if best is not None:
+                _, pa, pb = best
+                legs[k] = Leg(a.trip, a.board, pa)
+                legs[k + 1] = Leg(b.trip, pb, b.alight)
+        return Journey(tuple(legs))
+
     def profile(
         self,
         origin: int,
@@ -266,7 +304,8 @@ class Network:
         """Journeys for every departure in the window, de-duplicated."""
         out: dict[tuple, Journey] = {}
         for t in self.departures(origin, t_from, t_to):
-            for j in self.query(origin, t, target, max_rounds=max_rounds, via=via):
+            for raw in self.query(origin, t, target, max_rounds=max_rounds, via=via):
+                j = self.polish(raw)
                 if t_from <= j.dep <= t_to:
                     out.setdefault(j.signature(), j)
         return sorted(out.values(), key=lambda j: (j.dep, j.arr, j.changes))
@@ -275,11 +314,13 @@ class Network:
 def pareto(journeys: list[Journey]) -> list[Journey]:
     """Drop journeys dominated on (later departure, earlier arrival, fewer changes).
 
-    Of journeys with identical times and changes only the first is kept.
+    Of journeys with identical times and changes only the one with the most
+    generous change time is kept.
     """
     keep: list[Journey] = []
     seen: set[tuple[int, int, int]] = set()
-    for j in sorted(journeys, key=lambda j: (-j.dep, j.arr, j.changes)):
+    # among equal (dep, arr, changes) the safest connection comes first
+    for j in sorted(journeys, key=lambda j: (-j.dep, j.arr, j.changes, -j.min_slack)):
         key = (j.dep, j.arr, j.changes)
         if key in seen:
             continue

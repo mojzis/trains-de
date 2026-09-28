@@ -1,0 +1,45 @@
+{
+  "berlin-hamburg": {
+    "name": "Berlin → Hamburg",
+    "regional": false,
+    "color": "#1F5FBF",
+    "journeys": {
+      "outbound": [
+        "comfortjet"
+      ],
+      "return": [
+        "comfortjet-back"
+      ]
+    }
+  },
+  "leipzig-hannover": {
+    "name": "Leipzig → Hannover",
+    "regional": false,
+    "color": "#C0392B",
+    "journeys": {
+      "outbound": [
+        "via-leipzig-hannover"
+      ]
+    }
+  },
+  "schwandorf-nurnberg": {
+    "name": "Schwandorf → Nürnberg",
+    "regional": false,
+    "color": "#7A4FB5",
+    "journeys": {
+      "outbound": [
+        "west"
+      ]
+    }
+  },
+  "magdeburg-uelzen-regional": {
+    "name": "Magdeburg → Uelzen (regional)",
+    "regional": true,
+    "color": "#2F8A57",
+    "journeys": {
+      "outbound": [
+        "regional"
+      ]
+    }
+  }
+}

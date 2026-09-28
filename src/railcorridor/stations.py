@@ -151,11 +151,12 @@ def display_name(names: list[tuple[str, int]]) -> str:
     then names with diacritics (``Děčín`` over ``Decin``), then the shortest.
     """
 
-    def key(item: tuple[str, int]) -> tuple[int, int, int, int]:
+    def key(item: tuple[str, int]) -> tuple[int, int, int, int, int]:
         n, w = item
-        messy = any(ch in n for ch in ",/+()") or n.isupper()
+        messy = any(ch in n for ch in ",/+") or n.isupper()
+        bracketed = "(" in n
         has_diacritics = any(ord(ch) > 127 for ch in n)
-        return (int(messy), 0 if has_diacritics else 1, len(n), -w)
+        return (int(messy), int(bracketed), 0 if has_diacritics else 1, len(n), -w)
 
     return sorted(names, key=key)[0][0]
 

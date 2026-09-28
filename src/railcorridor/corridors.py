@@ -126,7 +126,12 @@ def collapse(journeys: list[Journey]) -> list[Journey]:
     for j in journeys:
         k = main_trip_key(j)
         o = best.get(k)
-        if o is None or (j.changes, -j.dep, j.arr) < (o.changes, -o.dep, o.arr):
+        if o is None or (j.changes, -j.dep, j.arr, -j.min_slack) < (
+            o.changes,
+            -o.dep,
+            o.arr,
+            -o.min_slack,
+        ):
             best[k] = j
     return sorted(best.values(), key=lambda j: (j.dep, j.arr))
 
@@ -254,8 +259,13 @@ def select(
     max_changes: int = 4,
     max_corridors: int = 4,
     max_regional: int = 1,
+    pinned: frozenset[str] = frozenset(),
 ) -> list[Corridor]:
-    """Drop implausible corridors, order the rest, assign colours."""
+    """Drop implausible corridors, order the rest, assign colours.
+
+    Corridors whose name is in ``pinned`` (the pair's expected corridors) are
+    kept whenever they were found; the remaining slots go to the fastest.
+    """
     for c in corridors.values():
         for d, js in c.journeys.items():
             c.journeys[d] = trim(collapse(pareto(js)))
@@ -271,7 +281,12 @@ def select(
         ]
     normal.sort(key=lambda c: (c.best_minutes(), c.fewest_changes(), c.id))
     regional.sort(key=lambda c: (c.best_minutes(), c.fewest_changes(), c.id))
-    chosen = normal[:max_corridors] + regional[:max_regional]
+    keep = [c for c in normal if c.name in pinned]
+    keep += [c for c in normal if c.name not in pinned][
+        : max(0, max_corridors - len(keep))
+    ]
+    normal = [c for c in normal if c in keep]
+    chosen = normal + regional[:max_regional]
     for i, c in enumerate(x for x in chosen if not x.regional):
         c.color = PALETTE[i % len(PALETTE)]
     for c in chosen:

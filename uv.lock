@@ -614,6 +614,7 @@ source = { editable = "." }
 dependencies = [
     { name = "duckdb" },
     { name = "jinja2" },
+    { name = "markupsafe" },
     { name = "numpy" },
     { name = "polars" },
     { name = "typer" },
@@ -642,6 +643,7 @@ dev = [
 requires-dist = [
     { name = "duckdb", specifier = ">=1.1" },
     { name = "jinja2", specifier = ">=3.1" },
+    { name = "markupsafe", specifier = ">=2.1" },
     { name = "numpy", specifier = ">=1.26" },
     { name = "polars", specifier = ">=1.0" },
     { name = "typer", specifier = ">=0.12" },
