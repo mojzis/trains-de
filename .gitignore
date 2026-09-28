@@ -16,4 +16,5 @@ htmlcov/
 .ruff_cache/
 .mypy_cache/
 data/
-out/
+# query results (out/<pair>/<date>.json) are tracked; the rendered page is not
+out/**/index.html

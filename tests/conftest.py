@@ -7,6 +7,7 @@ from pathlib import Path
 import duckdb
 import pytest
 
+from railcorridor.config import RoutingConfig
 from railcorridor.load import load_feed
 from railcorridor.router import Journey, Network
 from railcorridor.stations import build_stations
@@ -34,8 +35,10 @@ def route(
 ) -> Callable[..., list[Journey]]:
     """route("Alpha Hbf", "Gamma Hbf", date, "08:00") -> Pareto journeys."""
 
-    def run(a: str, b: str, date: dt.date, t0: str) -> list[Journey]:
-        tt = load_timetable(fixture_db, date, ["fx"])
+    def run(
+        a: str, b: str, date: dt.date, t0: str, cfg: RoutingConfig | None = None
+    ) -> list[Journey]:
+        tt = load_timetable(fixture_db, date, ["fx"], cfg=cfg)
         net = Network(tt)
         ids = {n: i for i, n in enumerate(tt.names)}
         h, m = t0.split(":")

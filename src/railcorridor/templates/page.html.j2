@@ -14,6 +14,7 @@
   --accent:#1F5FBF;
   --warn-bg:#FFF4DA; --warn-ink:#7A5200;
   --miss-bg:#FBE4E1; --miss-ink:#8A2A1E;
+  --tight:#C4410C;
   --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -27,6 +28,7 @@
     --bg:#10171E; --surface:#17212B; --ink:#E6ECEF; --muted:#93A1AA; --line:#2A3742; --soft:#1F2A35;
     --water:#3A6484; --land:#141D26; --accent:#6A9DEB;
     --warn-bg:#3A2E12; --warn-ink:#F2CE7A; --miss-bg:#3B1B18; --miss-ink:#F2A79C;
+    --tight:#F08A4B;
 {%- for c in corridors %}
     --c-{{ c.id }}:{{ c.color_dark }};
 {%- endfor %}
@@ -37,6 +39,7 @@
   --bg:#10171E; --surface:#17212B; --ink:#E6ECEF; --muted:#93A1AA; --line:#2A3742; --soft:#1F2A35;
   --water:#3A6484; --land:#141D26; --accent:#6A9DEB;
   --warn-bg:#3A2E12; --warn-ink:#F2CE7A; --miss-bg:#3B1B18; --miss-ink:#F2A79C;
+  --tight:#F08A4B;
 {%- for c in corridors %}
   --c-{{ c.id }}:{{ c.color_dark }};
 {%- endfor %}
@@ -54,6 +57,8 @@ h2{font-family:var(--display);font-weight:600;font-size:22px;margin:0;letter-spa
 .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px;flex-wrap:wrap}
 .seg button{font:600 15px var(--display);letter-spacing:.04em;border:0;background:transparent;color:var(--muted);padding:8px 14px;border-radius:7px;cursor:pointer}
+.seg button:disabled{opacity:.4;cursor:not-allowed}
+.seg[hidden]{display:none}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .seg.small button{font-size:13px;padding:6px 10px}
 button:focus-visible,.row:focus-visible,.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -98,6 +103,8 @@ button:focus-visible,.row:focus-visible,.chip:focus-visible{outline:2px solid va
 .gridline{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--soft)}
 .leg{position:absolute;top:4px;height:14px;border-radius:3px;background:var(--c);display:flex;align-items:center;justify-content:center;overflow:hidden;font:600 10px var(--display);letter-spacing:.05em;color:#fff;white-space:nowrap}
 .gap{position:absolute;top:10px;height:2px;background:repeating-linear-gradient(90deg,var(--muted) 0 3px,transparent 3px 6px)}
+.gap.tight{top:8px;height:6px;border-radius:3px;background:var(--tight);min-width:4px}
+.tight-flag{flex:none;display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:var(--tight);color:var(--surface);font:700 11px var(--body)}
 .dur{position:absolute;top:3px;font:500 11px var(--mono);color:var(--muted);white-space:nowrap;padding-left:6px}
 
 .detail{border-top:1px solid var(--line);padding-top:12px}
@@ -107,6 +114,8 @@ button:focus-visible,.row:focus-visible,.chip:focus-visible{outline:2px solid va
 .legs .dot{width:12px;height:12px;border-radius:50%;border:3px solid var(--c);background:var(--surface);margin-top:4px;position:relative}
 .legs .ride{grid-column:2/5;border-left:3px solid var(--c);margin-left:4.5px;padding:4px 0 8px 18px;color:var(--muted);font-size:13px}
 .legs .ride.walk{border-left-style:dotted;border-left-color:var(--muted)}
+.legs .ride.walk.tight{border-left:3px solid var(--tight);color:var(--tight)}
+.tight-note{font-weight:600}
 .legs .ttype{font:600 12px var(--display);letter-spacing:.06em;background:var(--c);color:#fff;padding:1px 6px;border-radius:3px;margin-right:6px}
 
 .warn{border-radius:10px;padding:12px 14px;font-size:14px;display:flex;gap:10px;background:var(--warn-bg);color:var(--warn-ink)}
@@ -133,6 +142,7 @@ select{font:500 14px var(--body);background:var(--surface);color:var(--ink);bord
     <div class="controls">
       <label class="legend-note" id="dateWrap" hidden>Date <select id="date"></select></label>
       <div class="seg" role="group" aria-label="Direction" id="dirs"></div>
+      <div class="seg small" role="group" aria-label="Change times" id="variant" hidden></div>
       <div class="seg small" role="group" aria-label="Theme" id="theme">
         <button data-theme-set="auto">Auto</button><button data-theme-set="light">Light</button><button data-theme-set="dark">Dark</button>
       </div>
@@ -149,8 +159,8 @@ select{font:500 14px var(--body);background:var(--surface);color:var(--ink);bord
     </section>
 
     <section class="panel" aria-label="Departures timeline">
-      <div class="panel-head"><h2 id="tlTitle">Departures</h2><span class="legend-note">Bars = trains · dotted = change</span></div>
-      <div class="tl"><div class="tl-inner" id="tl" style="--lbl:112px"></div></div>
+      <div class="panel-head"><h2 id="tlTitle">Departures</h2><span class="legend-note">Bars = trains · dotted = change · <span style="color:var(--tight);font-weight:600">orange</span> = change under {{ tight_change_min }} min</span></div>
+      <div class="tl"><div class="tl-inner" id="tl" style="--lbl:128px"></div></div>
       <div class="detail" id="detail"></div>
     </section>
   </div>

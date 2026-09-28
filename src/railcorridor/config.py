@@ -76,6 +76,10 @@ class RoutingConfig:
 
     hub_change_min: int = 8
     default_change_min: int = 5
+    # Floor on every change time, transfers.txt included (0 = no floor). The
+    # "comfortable changes" variant raises it so a small delay cannot break
+    # the journey.
+    min_change_min: int = 0
     max_rounds: int = 7
     max_rounds_regional: int = 9
     max_journeys: int = 12
@@ -90,6 +94,9 @@ class RoutingConfig:
     border_radius_km: float = 30.0
     extra_hubs: tuple[str, ...] = field(default_factory=tuple)
 
+
+# A change shorter than this is flagged as tight on the page.
+TIGHT_CHANGE_MIN = 10
 
 MERGE_RADIUS_M = 300.0
 

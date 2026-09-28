@@ -89,13 +89,20 @@ def query(
         typer.Option(help="Also search a regional-only (Deutschlandticket) corridor"),
     ] = True,
     max_journeys: Annotated[int, typer.Option(help="Journeys per direction")] = 12,
+    min_change: Annotated[
+        int,
+        typer.Option(
+            help="Floor on every change time in minutes; > 0 writes the "
+            "comfortable-changes variant <date>@c<N>.json"
+        ),
+    ] = 0,
     db: Annotated[Path, typer.Option(help="DuckDB file")] = DB_PATH,
     out: Annotated[Path, typer.Option(help="Output directory")] = OUT_DIR,
     fares: Annotated[Path, typer.Option(help="Fare notes TOML")] = FARES_PATH,
 ) -> None:
     """Compute journeys and corridors; writes out/<pair>/<date>.json."""
     day = dt.date.fromisoformat(date)
-    cfg = RoutingConfig(max_journeys=max_journeys)
+    cfg = RoutingConfig(max_journeys=max_journeys, min_change_min=min_change)
     pair = load_pair(from_, to)
     with duckdb.connect(str(db), read_only=True) as con:
         res = explore(
@@ -108,7 +115,9 @@ def query(
             cfg=cfg,
             log=typer.echo,
         )
-        doc = build_document(res, con, TomlFareProvider(fares))
+        doc = build_document(
+            res, con, TomlFareProvider(fares), min_change_min=min_change
+        )
     path = write_json(doc, out)
     for c in doc["corridors"]:
         typer.echo(f"  corridor {c['id']:<28} {c['name']}")

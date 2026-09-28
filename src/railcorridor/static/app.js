@@ -6,8 +6,11 @@
   const NS = "http://www.w3.org/2000/svg";
   const DIRS = ["outbound", "return"];
 
-  const state = { date: BUNDLE.dates[BUNDLE.dates.length - 1], dir: "outbound", on: {}, sel: 0 };
-  const doc = () => BUNDLE.docs[state.date];
+  const VARIANTS = BUNDLE.variants || {};
+  const TIGHT = BUNDLE.tight_change_min || 10;
+  const state = { date: BUNDLE.dates[BUNDLE.dates.length - 1], dir: "outbound", on: {}, sel: 0, variant: "" };
+  const hasVariant = (v) => !v || Boolean(BUNDLE.docs[`${state.date}@${v}`]);
+  const doc = () => BUNDLE.docs[state.variant && hasVariant(state.variant) ? `${state.date}@${state.variant}` : state.date];
 
   /* ---------- helpers ---------- */
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -19,6 +22,9 @@
   const stn = (id) => (doc().stations[id] || { name: id });
   const corridor = (id) => doc().corridors.find((c) => c.id === id);
   const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  /* change minutes between consecutive legs; tight ones get flagged */
+  const waits = (j) => j.legs.slice(1).map((l, i) => m(l.dep) - m(j.legs[i].arr));
+  const isTight = (w) => w < TIGHT;
   const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 
   function resetCorridors() {
@@ -41,7 +47,8 @@
     document.getElementById("title").innerHTML = b ? `${esc(a.trim())} <span class="arr">⇄</span> ${esc(b.trim())}` : esc(d.pair.title);
     document.title = `${d.pair.title} by Rail`;
     document.getElementById("subtitle").textContent = d.pair.subtitle || `Rail journeys between ${d.pair.from} and ${d.pair.to}, computed from GTFS timetables.`;
-    document.getElementById("eyebrow").textContent = `Departures ${d.window[0]}–${d.window[1]} · ${d.weekday} ${d.date} · computed from timetable data`;
+    const floor = d.min_change_min ? ` · every change ≥ ${d.min_change_min} min` : "";
+    document.getElementById("eyebrow").textContent = `Departures ${d.window[0]}–${d.window[1]} · ${d.weekday} ${d.date}${floor} · computed from timetable data`;
     const dirs = document.getElementById("dirs");
     dirs.innerHTML = "";
     for (const dir of DIRS) {
@@ -58,6 +65,19 @@
       sel.innerHTML = BUNDLE.dates.map((x) => `<option value="${x}"${x === state.date ? " selected" : ""}>${BUNDLE.docs[x].weekday.slice(0, 3)} ${x}</option>`).join("");
       sel.onchange = () => { state.date = sel.value; resetCorridors(); state.sel = fastestIndex(); drawChips(); render(); };
     }
+    const vs = Object.entries(VARIANTS);
+    const vbox = document.getElementById("variant");
+    vbox.hidden = !vs.length;
+    vbox.innerHTML = "";
+    for (const [v, min] of [["", 0], ...vs]) {
+      const bt = document.createElement("button");
+      bt.textContent = v ? `Changes ≥ ${min} min` : "Timetabled changes";
+      bt.title = v ? `Searched again with at least ${min} min for every change` : `Minimum change times from the timetable data; changes under ${TIGHT} min are marked`;
+      bt.disabled = !hasVariant(v);
+      bt.setAttribute("aria-pressed", String((state.variant && hasVariant(state.variant) ? state.variant : "") === v));
+      bt.onclick = () => { state.variant = v; resetCorridors(); state.sel = fastestIndex(); drawChips(); render(); };
+      vbox.appendChild(bt);
+    }
   }
 
   function drawNotes() {
@@ -66,7 +86,7 @@
     const d = doc();
     for (const n of d.notices || []) box.appendChild(h("div", "warn", `<span aria-hidden="true">⚠</span><span>${esc(n)}</span>`));
     for (const x of (d.missing || {})[state.dir] || []) {
-      box.appendChild(h("div", "warn miss", `<span aria-hidden="true">✕</span><span><b>Not in data: ${esc(x.name)}.</b> ${esc(x.reason)}. ${esc(x.note || "")}</span>`));
+      box.appendChild(h("div", "warn miss", `<span aria-hidden="true">✕</span><span><b>${x.reason.includes("slower") ? "Not shown" : "Not in data"}: ${esc(x.name)}.</b> ${esc(x.reason)}. ${esc(x.note || "")}</span>`));
     }
   }
 
@@ -141,8 +161,8 @@
       el("path", { d: dPath(pts), class: "route-line", stroke: cvar(selDep.corridor), "stroke-width": 2, "stroke-dasharray": "1 0", opacity: 0.95 }, svg);
     }
 
-    const changes = new Set();
-    if (selDep) selDep.legs.slice(1).forEach((l) => changes.add(l.from));
+    const changes = new Set(), tightAt = new Set();
+    if (selDep) selDep.legs.slice(1).forEach((l, i) => { changes.add(l.from); if (isTight(waits(selDep)[i])) tightAt.add(l.from); });
     const onSel = new Set();
     if (selDep) selDep.legs.forEach((l) => l.stops.forEach((s) => onSel.add(s)));
     const placed = [];
@@ -161,7 +181,8 @@
       el("circle", { cx: x, cy: y, r: ch ? 7.5 : big ? 5.5 : 3, fill: "var(--surface)", stroke: ch ? cvar(selDep.corridor) : "var(--ink)", "stroke-width": ch ? 3.5 : big ? 2.4 : 1.6, opacity: selDep && !onSel.has(id) && !big ? 0.5 : 1 }, svg);
       if (s.kind === "end") el("circle", { cx: x, cy: y, r: 2.5, fill: "var(--ink)" }, svg);
       if (!big && !ch) continue;
-      const label = s.name + (ch ? " ⇄" : "");
+      if (tightAt.has(id)) el("circle", { cx: x, cy: y, r: 11.5, fill: "none", stroke: "var(--tight)", "stroke-width": 2, "stroke-dasharray": "3 2.5" }, svg);
+      const label = s.name + (ch ? " ⇄" : "") + (tightAt.has(id) ? " !" : "");
       const w = label.length * 6.6 + 4;
       const right = x < W * 0.62;
       const lx = right ? x + 10 : x - 10;
@@ -222,13 +243,18 @@
       row.setAttribute("role", "button");
       row.style.setProperty("--c", cvar(dp.corridor));
       row.setAttribute("aria-label", `${corridor(dp.corridor).name}, ${dp.dep} to ${dp.arr}`);
-      row.innerHTML = `<div class="lab"><i style="background:${cvar(dp.corridor)}"></i>${dp.dep}→${fmtT(dp.arr)}</div>`;
+      const ws = waits(dp);
+      const tight = ws.filter(isTight);
+      const flag = tight.length ? `<b class="tight-flag" title="Tight change: ${Math.min(...tight)} min">!</b>` : "";
+      if (tight.length) row.setAttribute("aria-label", `${row.getAttribute("aria-label")}, tight change of ${Math.min(...tight)} minutes`);
+      row.innerHTML = `<div class="lab"><i style="background:${cvar(dp.corridor)}"></i>${dp.dep}→${fmtT(dp.arr)}${flag}</div>`;
       const tr = h("div", "track");
       for (const x of hours) { const g = h("div", "gridline"); g.style.left = pct(x); tr.appendChild(g); }
       dp.legs.forEach((l, j) => {
         if (j > 0) {
-          const g = h("div", "gap");
           const a = m(dp.legs[j - 1].arr), b = m(l.dep);
+          const g = h("div", "gap" + (isTight(b - a) ? " tight" : ""));
+          g.title = `${b - a} min change at ${stn(l.from).name}`;
           g.style.left = pct(a);
           g.style.width = `calc(${pct(b)} - ${pct(a)})`;
           tr.appendChild(g);
@@ -273,7 +299,8 @@
         const w = m(dp.legs[j + 1].dep) - m(l.arr);
         out += `<li><span class="t">${fmtT(l.arr)}</span><span class="dot"></span><span>${esc(stn(l.to).name)}</span><span></span></li>`;
         const walk = dp.legs[j + 1].from !== l.to ? ` · walk to ${esc(stn(dp.legs[j + 1].from).name)}` : "";
-        out += `<li><div class="ride walk">Change · ${w} min${walk}</div></li>`;
+        const tightNote = isTight(w) ? ` <span class="tight-note">tight — a small delay breaks it</span>` : "";
+        out += `<li><div class="ride walk${isTight(w) ? " tight" : ""}">Change · ${w} min${walk}${tightNote}</div></li>`;
       } else {
         out += `<li><span class="t">${fmtT(l.arr)}</span><span class="dot" style="background:var(--c)"></span><span><b>${esc(stn(l.to).name)}</b></span><span></span></li>`;
       }
