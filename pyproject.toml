@@ -1,8 +1,16 @@
 [project]
-name = "python-template"
+name = "railcorridor"
 version = "0.1.0"
-description = "A Python project template"
-requires-python = ">=3.11"
+description = "Rail corridor explorer: real train connections between two cities from GTFS"
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb>=1.1",
+    "typer>=0.12",
+    "jinja2>=3.1",
+]
+
+[project.scripts]
+railcorridor = "railcorridor.cli:app"
 
 [build-system]
 requires = ["hatchling"]
@@ -31,10 +39,16 @@ dev = [
 
 [tool.ruff]
 line-length = 88
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "DTZ", "T20", "PTH", "ERA", "PL", "TRY", "RUF"]
+# Routing code is a few deliberately long loops with many knobs; these rules
+# fight that shape more than they help.
+ignore = ["PLR0911", "PLR0912", "PLR0913", "PLR0915", "PLR0917", "PLR2004", "TRY003"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLC0415", "S101"]
 
 [tool.ruff.format]
 
@@ -42,7 +56,8 @@ select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "DTZ", "T20", "PTH", "ERA"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=src --cov-report=term-missing"
+addopts = "--cov=src --cov-report=term-missing -m 'not integration'"
+markers = ["integration: needs downloaded feeds / network (run with -m integration)"]
 
 [tool.coverage.run]
 source = ["src"]
@@ -52,11 +67,16 @@ show_missing = true
 
 [tool.bandit]
 exclude_dirs = ["tests"]
+# B608: SQL strings interpolate only feed schema names, which load.ident()
+# validates as plain identifiers; values always go through parameters.
+skips = ["B608"]
 
 [tool.vulture]
 paths = ["src"]
+ignore_decorators = ["@app.command"]
 
 [tool.deptry]
+known_first_party = ["railcorridor"]
 
 [tool.interrogate]
 fail_under = 0
@@ -71,7 +91,7 @@ extend_check = [
     { name = "zorilla", cmd = "zorilla check", timeout_s = 30, max_output_lines = 80 },
     # gerenuk scopes itself from the git diff, so no file list.
     # -o addopts= drops the --cov from [tool.pytest.ini_options]; the hook never reads coverage.
-    { name = "gerenuk", cmd = "gerenuk run -- -q -o addopts=", pass_files = false, timeout_s = 120, max_output_lines = 120 },
+    { name = "gerenuk", cmd = "gerenuk run -- -q -o addopts= -m \"not integration\"", pass_files = false, timeout_s = 120, max_output_lines = 120 },
 ]
 
 [tool.biston.scan]
@@ -100,7 +120,7 @@ cmd = "pytest -q --tb=short"
 help = "Run tests"
 
 [tool.poe.tasks.security]
-cmd = "bandit -r src -q"
+cmd = "bandit -c pyproject.toml -r src -q"
 help = "Security scan (bandit)"
 
 [tool.poe.tasks.vulns]
@@ -128,7 +148,7 @@ help = "Unused dependency check"
 shell = """
   ruff check . &
   ty check &
-  bandit -r src -q &
+  bandit -c pyproject.toml -r src -q &
   zorilla check . &
   biston scan . &
   (uvx pysentry-rs . || true) &

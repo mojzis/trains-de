@@ -1,0 +1,36 @@
+# Corridor explorer settings for one city pair. Everything here is optional
+# except `from` / `to`; without a pair file the explorer picks hubs itself.
+
+from = "Praha hl.n."
+to = "Lüneburg"
+title = "Praha ⇄ Lüneburg"
+subtitle = "Ways to cross from the Vltava to the Lüneburger Heide, computed from GTFS timetables. Pick a direction, click a departure to trace it on the map."
+
+# Places used to group and name corridors, most distinctive first. A station
+# belongs to a place when its name starts with the place name
+# ("Hamburg-Harburg" -> Hamburg).
+places = [
+  "Berlin", "Hannover", "Nürnberg", "Leipzig", "Magdeburg", "Hamburg",
+  "Schwandorf", "Uelzen", "Stendal", "Dresden", "Plzeň", "Děčín",
+]
+
+# Extra searches that must pass through these stations. They surface
+# corridors that are slower than the best one but still worth knowing.
+search_via = [
+  "Berlin Hbf", "Hannover Hbf", "Nürnberg Hbf", "Leipzig Hbf", "Magdeburg Hbf",
+  "Schwandorf",
+]
+
+# Corridors we expect, listed first in this order (which also fixes their
+# colours); if one finds no journey it is shown as "not in data".
+[[expected]]
+name = "Berlin → Hamburg"
+note = "ComfortJet Praha–Dresden–Berlin–Hamburg, change in Hamburg."
+
+[[expected]]
+name = "Leipzig → Hannover"
+note = "RJ to Dresden, IC via Leipzig and Magdeburg to Hannover, then ICE to Lüneburg."
+
+[[expected]]
+name = "Schwandorf → Nürnberg"
+note = "Praha–Plzeň–Furth im Wald–Schwandorf, then the direct ICE Nürnberg–Lüneburg."
