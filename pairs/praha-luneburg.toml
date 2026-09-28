@@ -21,10 +21,15 @@ search_via = [
   "Schwandorf",
 ]
 
-# Corridors we expect; if one finds no journey it is shown as "not in data".
+# Corridors we expect, listed first in this order (which also fixes their
+# colours); if one finds no journey it is shown as "not in data".
 [[expected]]
 name = "Berlin → Hamburg"
 note = "ComfortJet Praha–Dresden–Berlin–Hamburg, change in Hamburg."
+
+[[expected]]
+name = "Leipzig → Hannover"
+note = "RJ to Dresden, IC via Leipzig and Magdeburg to Hannover, then ICE to Lüneburg."
 
 [[expected]]
 name = "Schwandorf → Nürnberg"

@@ -150,7 +150,9 @@
     const transfers = new Set();
     for (const j of currentDeps()) j.legs.slice(1).forEach((l) => transfers.add(l.from));
     const prio = ([id, s]) => (s.kind === "end" ? 3 : 0) + (changes.has(id) ? 2 : 0) + (transfers.has(id) ? 1 : 0) + (s.hub ? 0.5 : 0);
-    const entries = Object.entries(d.stations).filter(([id, s]) => s.on_map || changes.has(id));
+    const shown = new Set(onSel);
+    for (const c of visible) c.path.forEach((id) => shown.add(id));
+    const entries = Object.entries(d.stations).filter(([id, s]) => s.kind === "end" || (s.on_map && shown.has(id)) || changes.has(id));
     entries.sort((a, b) => prio(b) - prio(a));
     for (const [id, s] of entries) {
       const [x, y] = P(s.lat, s.lon);
@@ -207,7 +209,7 @@
     const ax = h("div", "axis");
     const hours = [];
     for (let x = T0; x <= T1; x += 120) hours.push(x);
-    for (const x of hours) { const s = document.createElement("span"); s.style.left = pct(x); s.textContent = fmtT(`${Math.floor(x / 60)}:00`.padStart(5, "0")); ax.appendChild(s); }
+    for (const x of hours) { const s = document.createElement("span"); s.style.left = pct(x); s.textContent = `${String(Math.floor(x / 60) % 24).padStart(2, "0")}:00`; ax.appendChild(s); }
     tl.appendChild(ax);
     const deps = currentDeps();
     if (!deps.length) {

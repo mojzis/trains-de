@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import itertools
 import math
+import re
 import statistics
 from dataclasses import dataclass, field
 
@@ -50,8 +51,11 @@ class Places:
     names: list[str]
 
     def rank(self, place: str) -> int:
-        """Lower is more distinctive."""
-        return self.names.index(place)
+        """Lower is more distinctive; ad-hoc places come last."""
+        try:
+            return self.names.index(place)
+        except ValueError:
+            return len(self.names)
 
     def of(self, station_name: str) -> str | None:
         """The place a station belongs to, if any."""
@@ -72,16 +76,17 @@ def visits(
 
     ``exclude`` holds the origin/destination places, which never name a
     corridor. Consecutive repeats are collapsed; a place is a transfer if a leg
-    ends there (other than the last leg).
+    ends there (other than the last leg). A change at a station outside the
+    place list still counts, under the station's own name.
     """
     out: list[Visit] = []
     n = len(stations_per_leg)
     for li, names in enumerate(stations_per_leg):
         for si, nm in enumerate(names):
-            p = places.of(nm)
+            is_transfer = si == len(names) - 1 and li < n - 1
+            p = places.of(nm) or (_adhoc(nm) if is_transfer else None)
             if p is None or p in exclude:
                 continue
-            is_transfer = si == len(names) - 1 and li < n - 1
             if out and out[-1].place == p:
                 if is_transfer and not out[-1].transfer:
                     out[-1] = Visit(p, True)
@@ -90,9 +95,14 @@ def visits(
     return out
 
 
+def _adhoc(station_name: str) -> str:
+    """Place name for a change station outside the list: ``Büchen``."""
+    return re.sub(r"\s*(\(.*\)|Hbf|hl\.n\.|hlavní nádraží)\s*$", "", station_name)
+
+
 def corridor_name(vs: list[Visit], places: Places, *, regional: bool) -> str | None:
-    """Human name for a corridor, or None if the journey touches no place."""
-    if not vs:
+    """Human name for a corridor, or None if the journey touches no listed place."""
+    if not any(v.place in places.names for v in vs):
         return None
     transfers = [i for i, v in enumerate(vs) if v.transfer]
     suffix = " (regional)" if regional else ""
@@ -251,6 +261,38 @@ def group(
     return out
 
 
+def drop_clearly_worse(corridors: dict[str, Corridor], margin_s: int) -> None:
+    """Drop non-regional journeys that another one beats by a wide margin.
+
+    J goes when some other non-regional journey leaves no earlier, has no more
+    changes and arrives at least ``margin_s`` sooner. Plain Pareto dominance
+    would also remove useful fallbacks (another corridor a few minutes
+    slower); the margin keeps those. Regional journeys are compared only
+    among themselves by the per-corridor Pareto step.
+    """
+    by_dir: dict[str, list[Journey]] = {}
+    for c in corridors.values():
+        if c.regional:
+            continue
+        for d, js in c.journeys.items():
+            by_dir.setdefault(d, []).extend(js)
+    for c in corridors.values():
+        if c.regional:
+            continue
+        for d, js in c.journeys.items():
+            others = by_dir.get(d, [])
+            c.journeys[d] = [
+                j
+                for j in js
+                if not any(
+                    k.dep >= j.dep
+                    and k.changes <= j.changes
+                    and k.arr <= j.arr - margin_s
+                    for k in others
+                )
+            ]
+
+
 def select(
     corridors: dict[str, Corridor],
     *,
@@ -259,16 +301,20 @@ def select(
     max_changes: int = 4,
     max_corridors: int = 4,
     max_regional: int = 1,
-    pinned: frozenset[str] = frozenset(),
+    pinned: tuple[str, ...] = (),
+    margin_min: int = 90,
 ) -> list[Corridor]:
     """Drop implausible corridors, order the rest, assign colours.
 
     Corridors whose name is in ``pinned`` (the pair's expected corridors) are
-    kept whenever they were found; the remaining slots go to the fastest.
+    kept whenever they were found and come first, in that order; the
+    remaining slots go to the fastest.
     """
     for c in corridors.values():
         for d, js in c.journeys.items():
             c.journeys[d] = trim(collapse(pareto(js)))
+    drop_clearly_worse(corridors, margin_s=margin_min * 60)
+    corridors = {k: c for k, c in corridors.items() if any(c.journeys.values())}
     normal = [c for c in corridors.values() if not c.regional]
     regional = [c for c in corridors.values() if c.regional]
     if normal:
@@ -281,11 +327,12 @@ def select(
         ]
     normal.sort(key=lambda c: (c.best_minutes(), c.fewest_changes(), c.id))
     regional.sort(key=lambda c: (c.best_minutes(), c.fewest_changes(), c.id))
-    keep = [c for c in normal if c.name in pinned]
+    order = {name: i for i, name in enumerate(pinned)}
+    keep = sorted((c for c in normal if c.name in pinned), key=lambda c: order[c.name])
     keep += [c for c in normal if c.name not in pinned][
         : max(0, max_corridors - len(keep))
     ]
-    normal = [c for c in normal if c in keep]
+    normal = keep
     chosen = normal + regional[:max_regional]
     for i, c in enumerate(x for x in chosen if not x.regional):
         c.color = PALETTE[i % len(PALETTE)]

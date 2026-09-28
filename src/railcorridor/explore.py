@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import datetime as dt
+import multiprocessing as mp
+import os
 import time
 import tomllib
 from collections import Counter
@@ -150,19 +152,28 @@ def explore(
             vias.append(tt.index[sid])
 
     directions = DIRECTIONS if both_directions else DIRECTIONS[:1]
-    found: dict[str, list[Journey]] = {}
-    t0 = time.perf_counter()
+    nets = {"all": net}
+    if net_regional is not None:
+        nets["regional"] = net_regional
+    jobs: list[tuple[str, str, int, int, tuple[int, int], int, int | None]] = []
     for direction in directions:
         a, b = (origin, target) if direction == "outbound" else (target, origin)
-        js: dict[tuple, Journey] = {}
-        runs: list[tuple[Network, int | None, int]] = [(net, None, cfg.max_rounds)]
-        runs += [(net, v, cfg.max_rounds) for v in vias]
+        jobs.append((direction, "all", a, b, window, cfg.max_rounds, None))
+        jobs += [(direction, "all", a, b, window, cfg.max_rounds, v) for v in vias]
         if net_regional is not None:
-            runs.append((net_regional, None, cfg.max_rounds_regional))
-        for n, via, rounds in runs:
-            for j in n.profile(a, b, *window, max_rounds=rounds, via=via):
-                js.setdefault(j.signature(), j)
-        found[direction] = sorted(js.values(), key=lambda j: (j.dep, j.arr))
+            jobs.append(
+                (direction, "regional", a, b, window, cfg.max_rounds_regional, None)
+            )
+    t0 = time.perf_counter()
+    found: dict[str, list[Journey]] = {}
+    per_dir: dict[str, dict[tuple, Journey]] = {d: {} for d in directions}
+    for direction, js in _run_all(nets, jobs):
+        for j in js:
+            per_dir[direction].setdefault(j.signature(), j)
+    for direction in directions:
+        found[direction] = sorted(
+            per_dir[direction].values(), key=lambda j: (j.dep, j.arr)
+        )
         log(f"{direction}: {len(found[direction])} candidate journeys")
     timings["search_s"] = time.perf_counter() - t0
 
@@ -171,7 +182,7 @@ def explore(
         grouped,
         ratio=cfg.corridor_ratio,
         slack_min=int(cfg.corridor_slack_hours * 60),
-        pinned=frozenset(e["name"] for e in pair.expected),
+        pinned=tuple(e["name"] for e in pair.expected),
     )
     chosen = {
         d: pick_journeys(chosen_corridors, d, cfg.max_journeys) for d in directions
@@ -206,6 +217,28 @@ def explore(
         missing=missing,
         timings=timings,
     )
+
+
+_NETS: dict[str, Network] = {}
+
+
+def _job(job: tuple) -> tuple[str, list[Journey]]:
+    direction, key, a, b, window, rounds, via = job
+    return direction, _NETS[key].profile(a, b, *window, max_rounds=rounds, via=via)
+
+
+def _run_all(
+    nets: dict[str, Network], jobs: list[tuple]
+) -> list[tuple[str, list[Journey]]]:
+    """Run searches in forked worker processes (sequentially where fork is missing)."""
+    _NETS.clear()
+    _NETS.update(nets)
+    workers = min(len(jobs), os.cpu_count() or 1)
+    if workers <= 1 or "fork" not in mp.get_all_start_methods():
+        return [_job(j) for j in jobs]
+    ctx = mp.get_context("fork")  # workers inherit the networks without pickling
+    with ctx.Pool(workers) as pool:
+        return pool.map(_job, jobs, chunksize=1)
 
 
 def parse_window(text: str) -> tuple[int, int]:
