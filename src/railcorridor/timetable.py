@@ -141,6 +141,8 @@ def load_timetable(
     for f in map(ident, feeds):
         trips.extend(_feed_trips(con, f, date, idx))
         _apply_transfers(con, f, idx, change)
+    floor = cfg.min_change_min * 60
+    change = [max(c, floor) for c in change]
     trips = join_through_trips(
         trips, cfg.through_join_max_gap_s, near_border(st_rows, cfg.border_radius_km)
     )

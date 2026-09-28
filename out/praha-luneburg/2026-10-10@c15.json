@@ -1,0 +1,3796 @@
+{
+ "schema": 1,
+ "pair": {
+  "id": "praha-luneburg",
+  "from": "Praha hlavní nádraží",
+  "to": "Lüneburg",
+  "from_id": "praha-hlavni-nadrazi",
+  "to_id": "luneburg",
+  "title": "Praha ⇄ Lüneburg",
+  "subtitle": "Ways to cross from the Vltava to the Lüneburger Heide, computed from GTFS timetables. Pick a direction, click a departure to trace it on the map."
+ },
+ "date": "2026-10-10",
+ "weekday": "Saturday",
+ "window": [
+  "04:00",
+  "11:00"
+ ],
+ "variant": "c15",
+ "min_change_min": 15,
+ "generated_at": "2026-09-28T13:28:53+00:00",
+ "feeds": [
+  {
+   "name": "de_fv",
+   "title": "gtfs.de Germany long-distance rail (fv_free)",
+   "file": "de_fv_20260928.zip",
+   "valid_from": "2026-09-26",
+   "valid_to": "2026-10-26",
+   "licence": "CC BY 4.0",
+   "attribution": "DELFI e.V. / gtfs.de",
+   "url": "https://gtfs.de"
+  },
+  {
+   "name": "de_rv",
+   "title": "gtfs.de Germany regional rail (rv_free)",
+   "file": "de_rv_20260928.zip",
+   "valid_from": "2026-09-26",
+   "valid_to": "2026-10-26",
+   "licence": "CC BY 4.0",
+   "attribution": "DELFI e.V. / gtfs.de",
+   "url": "https://gtfs.de"
+  },
+  {
+   "name": "cz_czptt",
+   "title": "Czech rail timetable (CZPTT via JrUtil / obehy.cz)",
+   "file": "cz_czptt_20260928.zip",
+   "valid_from": "2025-12-14",
+   "valid_to": "2026-12-12",
+   "licence": "CC0 1.0",
+   "attribution": "Správa železnic (CZPTT open data), converted by the Oběhy project",
+   "url": "https://obehy.cz"
+  }
+ ],
+ "notices": [],
+ "missing": {
+  "outbound": [
+   {
+    "name": "Leipzig → Hannover",
+    "note": "RJ to Dresden, IC via Leipzig and Magdeburg to Hannover, then ICE to Lüneburg.",
+    "reason": "found only in the other direction"
+   },
+   {
+    "name": "Schwandorf → Nürnberg",
+    "note": "Praha–Plzeň–Furth im Wald–Schwandorf, then the direct ICE Nürnberg–Lüneburg.",
+    "reason": "found, but much slower than the best corridor"
+   }
+  ],
+  "return": [
+   {
+    "name": "Schwandorf → Nürnberg",
+    "note": "Praha–Plzeň–Furth im Wald–Schwandorf, then the direct ICE Nürnberg–Lüneburg.",
+    "reason": "found, but much slower than the best corridor"
+   }
+  ]
+ },
+ "stations": {
+  "bad-bevensen": {
+   "name": "Bad Bevensen",
+   "lat": 53.07825,
+   "lon": 10.57414,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "bad-schandau": {
+   "name": "Bad Schandau",
+   "lat": 50.91913,
+   "lon": 14.13844,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "berlin-hbf": {
+   "name": "Berlin Hbf",
+   "lat": 52.5256,
+   "lon": 13.36908,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "biederitz": {
+   "name": "Biederitz",
+   "lat": 52.15271,
+   "lon": 11.71647,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "bienenbuttel": {
+   "name": "Bienenbüttel",
+   "lat": 53.14209,
+   "lon": 10.48475,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "bitterfeld": {
+   "name": "Bitterfeld",
+   "lat": 51.62286,
+   "lon": 12.31685,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "bohusovice-nad-ohri": {
+   "name": "Bohušovice nad Ohří",
+   "lat": 50.49148,
+   "lon": 14.1484,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "borsdorf-sachs": {
+   "name": "Borsdorf(Sachs)",
+   "lat": 51.3457,
+   "lon": 12.54116,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "braunschweig-hbf": {
+   "name": "Braunschweig Hbf",
+   "lat": 52.25264,
+   "lon": 10.53955,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "brunau-packebusch": {
+   "name": "Brunau-Packebusch",
+   "lat": 52.75127,
+   "lon": 11.48459,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "celle": {
+   "name": "Celle",
+   "lat": 52.62053,
+   "lon": 10.06321,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "coswig-bahnhof": {
+   "name": "Coswig Bahnhof",
+   "lat": 51.12302,
+   "lon": 13.57937,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "dahlen-sachs": {
+   "name": "Dahlen(Sachs)",
+   "lat": 51.35097,
+   "lon": 12.98425,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "decin-certova-voda": {
+   "name": "Děčín-Čertova Voda",
+   "lat": 50.81669,
+   "lon": 14.22158,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "decin-hlavni-nadrazi": {
+   "name": "Děčín hlavní nádraží",
+   "lat": 50.7734,
+   "lon": 14.20107,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "decin-priper": {
+   "name": "Děčín-Přípeř",
+   "lat": 50.78499,
+   "lon": 14.20928,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "decin-prostredni-zleb": {
+   "name": "Děčín-Prostřední Žleb",
+   "lat": 50.79372,
+   "lon": 14.23079,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "delitzsch-unt-bf": {
+   "name": "Delitzsch unt Bf",
+   "lat": 51.52523,
+   "lon": 12.34522,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "dessau-hbf": {
+   "name": "Dessau Hbf",
+   "lat": 51.83987,
+   "lon": 12.23494,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "dolni-zleb": {
+   "name": "Dolní Žleb",
+   "lat": 50.84627,
+   "lon": 14.21521,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "dolni-zleb-zastavka": {
+   "name": "Dolní Žleb zastávka",
+   "lat": 50.83725,
+   "lon": 14.22338,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "dresden-dobritz": {
+   "name": "Dresden-Dobritz",
+   "lat": 51.01163,
+   "lon": 13.80852,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "dresden-hbf": {
+   "name": "Dresden Hbf",
+   "lat": 51.03993,
+   "lon": 13.73293,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "dresden-mitte": {
+   "name": "Dresden Mitte",
+   "lat": 51.05564,
+   "lon": 13.72339,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "dresden-neustadt": {
+   "name": "Dresden-Neustadt",
+   "lat": 51.06543,
+   "lon": 13.74088,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "dresden-niedersedlitz": {
+   "name": "Dresden-Niedersedlitz",
+   "lat": 50.99946,
+   "lon": 13.82882,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "dresden-reick": {
+   "name": "Dresden-Reick",
+   "lat": 51.02127,
+   "lon": 13.79064,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "dresden-strehlen": {
+   "name": "Dresden-Strehlen",
+   "lat": 51.03102,
+   "lon": 13.76114,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "dresden-zschachwitz": {
+   "name": "Dresden-Zschachwitz",
+   "lat": 50.98965,
+   "lon": 13.84517,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "eschede": {
+   "name": "Eschede",
+   "lat": 52.74069,
+   "lon": 10.23024,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "fleetmark": {
+   "name": "Fleetmark",
+   "lat": 52.7908,
+   "lon": 11.37869,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "glaubitz-bahnhof": {
+   "name": "Glaubitz Bahnhof",
+   "lat": 51.31694,
+   "lon": 13.36667,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "gommern": {
+   "name": "Gommern",
+   "lat": 52.074,
+   "lon": 11.83878,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "grossburgwedel": {
+   "name": "Großburgwedel",
+   "lat": 52.50615,
+   "lon": 9.85762,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "gutergluck": {
+   "name": "Güterglück",
+   "lat": 51.99347,
+   "lon": 11.98639,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "halle-saale-hbf": {
+   "name": "Halle(Saale)Hbf",
+   "lat": 51.47751,
+   "lon": 11.98708,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "hamburg-harburg-s": {
+   "name": "Hamburg-Harburg(S)",
+   "lat": 53.45689,
+   "lon": 9.99131,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "hamburg-hbf": {
+   "name": "Hamburg Hbf",
+   "lat": 53.55286,
+   "lon": 10.00831,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "hannover-hbf": {
+   "name": "Hannover Hbf",
+   "lat": 52.37649,
+   "lon": 9.74107,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "heidenau": {
+   "name": "Heidenau",
+   "lat": 50.98081,
+   "lon": 13.85994,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "heidenau-grosssedlitz": {
+   "name": "Heidenau-Großsedlitz",
+   "lat": 50.96099,
+   "lon": 13.89445,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "heidenau-sud": {
+   "name": "Heidenau Süd",
+   "lat": 50.97237,
+   "lon": 13.87434,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "helmstedt": {
+   "name": "Helmstedt",
+   "lat": 52.22207,
+   "lon": 11.01009,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "hnevice": {
+   "name": "Hněvice",
+   "lat": 50.45305,
+   "lon": 14.36143,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "hohenwulsch": {
+   "name": "Hohenwulsch",
+   "lat": 52.66732,
+   "lon": 11.59514,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "isernhagen": {
+   "name": "Isernhagen",
+   "lat": 52.48514,
+   "lon": 9.80221,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "kladen-stendal": {
+   "name": "Kläden(Stendal)",
+   "lat": 52.63485,
+   "lon": 11.66111,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "konigsborn": {
+   "name": "Königsborn",
+   "lat": 52.13401,
+   "lon": 11.75627,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "konigstein-bahnhof": {
+   "name": "Königstein Bahnhof",
+   "lat": 50.91941,
+   "lon": 14.07854,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "kothen": {
+   "name": "Köthen",
+   "lat": 51.75193,
+   "lon": 11.98936,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "kralupy-nad-vltavou": {
+   "name": "Kralupy nad Vltavou",
+   "lat": 50.23841,
+   "lon": 14.31397,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "krippen": {
+   "name": "Krippen",
+   "lat": 50.91312,
+   "lon": 14.16024,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "kuhren": {
+   "name": "Kühren",
+   "lat": 51.34939,
+   "lon": 12.83323,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "kurort-rathen": {
+   "name": "Kurort Rathen",
+   "lat": 50.95654,
+   "lon": 14.07603,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "langenhagen-mitte": {
+   "name": "Langenhagen Mitte",
+   "lat": 52.44049,
+   "lon": 9.7261,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "leipzig-engelsdorf": {
+   "name": "Leipzig-Engelsdorf",
+   "lat": 51.34394,
+   "lon": 12.47763,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "leipzig-halle-flughafen": {
+   "name": "Leipzig/Halle Flughafen",
+   "lat": 51.42334,
+   "lon": 12.22343,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "leipzig-hbf": {
+   "name": "Leipzig Hbf",
+   "lat": 51.34555,
+   "lon": 12.38149,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "leipzig-messe": {
+   "name": "Leipzig Messe",
+   "lat": 51.39628,
+   "lon": 12.39044,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "lovosice": {
+   "name": "Lovosice",
+   "lat": 50.50968,
+   "lon": 14.05948,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "lubs-magdeburg": {
+   "name": "Lübs(Magdeburg)",
+   "lat": 52.02021,
+   "lon": 11.93517,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "luneburg": {
+   "name": "Lüneburg",
+   "lat": 53.24966,
+   "lon": 10.41989,
+   "hub": true,
+   "kind": "end",
+   "on_map": true
+  },
+  "magdeburg-eichenweiler": {
+   "name": "Magdeburg-Eichenweiler",
+   "lat": 52.16645,
+   "lon": 11.65798,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "magdeburg-hbf": {
+   "name": "Magdeburg Hbf",
+   "lat": 52.13051,
+   "lon": 11.62696,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "magdeburg-herrenkrug": {
+   "name": "Magdeburg Herrenkrug",
+   "lat": 52.14545,
+   "lon": 11.67638,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "magdeburg-neustadt": {
+   "name": "Magdeburg-Neustadt",
+   "lat": 52.14884,
+   "lon": 11.6417,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "magdeburg-rothensee": {
+   "name": "Magdeburg-Rothensee",
+   "lat": 52.18676,
+   "lon": 11.64791,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "niederau": {
+   "name": "Niederau",
+   "lat": 51.1766,
+   "lon": 13.56077,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "nunchritz": {
+   "name": "Nünchritz",
+   "lat": 51.30282,
+   "lon": 13.39158,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "obervogelgesang": {
+   "name": "Obervogelgesang",
+   "lat": 50.94985,
+   "lon": 13.98963,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "oschatz": {
+   "name": "Oschatz",
+   "lat": 51.31174,
+   "lon": 13.10406,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "pirna": {
+   "name": "Pirna",
+   "lat": 50.96235,
+   "lon": 13.92886,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "praha-hlavni-nadrazi": {
+   "name": "Praha hlavní nádraží",
+   "lat": 50.08309,
+   "lon": 14.436,
+   "hub": true,
+   "kind": "end",
+   "on_map": true
+  },
+  "praha-holesovice": {
+   "name": "Praha-Holešovice",
+   "lat": 50.1106,
+   "lon": 14.43973,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "praha-podbaba": {
+   "name": "Praha-Podbaba",
+   "lat": 50.11235,
+   "lon": 14.39551,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "pretzier-altm": {
+   "name": "Pretzier(Altm)",
+   "lat": 52.83644,
+   "lon": 11.26454,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "priestewitz": {
+   "name": "Priestewitz",
+   "lat": 51.25074,
+   "lon": 13.50876,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "prodel": {
+   "name": "Prödel",
+   "lat": 52.03764,
+   "lon": 11.91334,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "radebeul-ost": {
+   "name": "Radebeul Ost",
+   "lat": 51.09842,
+   "lon": 13.68004,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "riesa": {
+   "name": "Riesa",
+   "lat": 51.3094,
+   "lon": 13.28838,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "rodleben": {
+   "name": "Rodleben",
+   "lat": 51.89749,
+   "lon": 12.21729,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "rosslau-elbe": {
+   "name": "Roßlau(Elbe)",
+   "lat": 51.88461,
+   "lon": 12.23726,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "roudnice-nad-labem": {
+   "name": "Roudnice nad Labem",
+   "lat": 50.42645,
+   "lon": 14.26518,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "s-spandau-bhf": {
+   "name": "S Spandau Bhf",
+   "lat": 52.5348,
+   "lon": 13.19748,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "s-sudkreuz-bhf": {
+   "name": "S Südkreuz Bhf",
+   "lat": 52.4755,
+   "lon": 13.36555,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "salzwedel": {
+   "name": "Salzwedel",
+   "lat": 52.85811,
+   "lon": 11.16203,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "schmilka-hirschmuhle": {
+   "name": "Schmilka-Hirschmühle",
+   "lat": 50.88973,
+   "lon": 14.22871,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "schnega": {
+   "name": "Schnega",
+   "lat": 52.86901,
+   "lon": 10.89034,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "schona": {
+   "name": "Schöna",
+   "lat": 50.87614,
+   "lon": 14.23478,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "schona-gr": {
+   "name": "Schöna(Gr)",
+   "lat": 50.86005,
+   "lon": 14.22213,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "soltendieck": {
+   "name": "Soltendieck",
+   "lat": 52.87421,
+   "lon": 10.76142,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "stadt-wehlen-bahnhof": {
+   "name": "Stadt Wehlen Bahnhof",
+   "lat": 50.95394,
+   "lon": 14.03275,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "stederdorf-wrestedt": {
+   "name": "Stederdorf(Wrestedt)",
+   "lat": 52.90743,
+   "lon": 10.5927,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "steinfeld-stendal": {
+   "name": "Steinfeld(Stendal)",
+   "lat": 52.61477,
+   "lon": 11.72885,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "stendal-hbf": {
+   "name": "Stendal Hbf",
+   "lat": 52.59472,
+   "lon": 11.85441,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "suderburg": {
+   "name": "Suderburg",
+   "lat": 52.90488,
+   "lon": 10.43281,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "tangerhutte": {
+   "name": "Tangerhütte",
+   "lat": 52.43387,
+   "lon": 11.80994,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "uelzen": {
+   "name": "Uelzen",
+   "lat": 52.96979,
+   "lon": 10.55302,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "unterluss": {
+   "name": "Unterlüß",
+   "lat": 52.83447,
+   "lon": 10.29927,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "usti-nad-labem-hlavni-nadrazi": {
+   "name": "Ústí nad Labem hlavní nádraží",
+   "lat": 50.65917,
+   "lon": 14.04411,
+   "hub": true,
+   "kind": "hub",
+   "on_map": true
+  },
+  "wahlitz": {
+   "name": "Wahlitz",
+   "lat": 52.10918,
+   "lon": 11.78887,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "weinbohla-hp": {
+   "name": "Weinböhla Hp",
+   "lat": 51.15887,
+   "lon": 13.56171,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "wieren": {
+   "name": "Wieren",
+   "lat": 52.89258,
+   "lon": 10.65564,
+   "hub": false,
+   "kind": "minor",
+   "on_map": true
+  },
+  "winsen-luhe": {
+   "name": "Winsen(Luhe)",
+   "lat": 53.35384,
+   "lon": 10.20769,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "wolfen-bitterfeld": {
+   "name": "Wolfen(Bitterfeld)",
+   "lat": 51.66116,
+   "lon": 12.27956,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "wolmirstedt": {
+   "name": "Wolmirstedt",
+   "lat": 52.2509,
+   "lon": 11.63594,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "wurzen": {
+   "name": "Wurzen",
+   "lat": 51.36442,
+   "lon": 12.73897,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "zerbst-anhalt": {
+   "name": "Zerbst/Anhalt",
+   "lat": 51.95382,
+   "lon": 12.08893,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  },
+  "zielitz-ort": {
+   "name": "Zielitz Ort",
+   "lat": 52.28828,
+   "lon": 11.67631,
+   "hub": false,
+   "kind": "minor",
+   "on_map": false
+  }
+ },
+ "corridors": [
+  {
+   "id": "berlin-hamburg",
+   "name": "Berlin → Hamburg",
+   "regional": false,
+   "color": "#1F5FBF",
+   "color_dark": "#6A9DEB",
+   "via": "Děčín · Dresden · Berlin · Hamburg",
+   "geometry": [
+    [
+     50.0831,
+     14.436
+    ],
+    [
+     50.6592,
+     14.0441
+    ],
+    [
+     50.7734,
+     14.2011
+    ],
+    [
+     50.9191,
+     14.1384
+    ],
+    [
+     51.0399,
+     13.7329
+    ],
+    [
+     51.0654,
+     13.7409
+    ],
+    [
+     52.5256,
+     13.3691
+    ],
+    [
+     52.5348,
+     13.1975
+    ],
+    [
+     53.5529,
+     10.0083
+    ],
+    [
+     53.4569,
+     9.9913
+    ],
+    [
+     53.2497,
+     10.4199
+    ]
+   ],
+   "path": [
+    "praha-hlavni-nadrazi",
+    "usti-nad-labem-hlavni-nadrazi",
+    "decin-hlavni-nadrazi",
+    "bad-schandau",
+    "dresden-hbf",
+    "dresden-neustadt",
+    "berlin-hbf",
+    "s-spandau-bhf",
+    "hamburg-hbf",
+    "hamburg-harburg-s",
+    "luneburg"
+   ],
+   "stats": {
+    "outbound": {
+     "journeys": 3,
+     "duration_median_min": 417,
+     "duration_min_min": 417,
+     "changes_min": 1,
+     "changes_max": 1,
+     "earliest_dep": "06:31",
+     "latest_arr": "17:28",
+     "every_h": 2.3
+    },
+    "return": {
+     "journeys": 3,
+     "duration_median_min": 414,
+     "duration_min_min": 414,
+     "changes_min": 1,
+     "changes_max": 2,
+     "earliest_dep": "06:31",
+     "latest_arr": "17:25",
+     "every_h": 2.3
+    }
+   },
+   "tags": [
+    "Fastest",
+    "1 change"
+   ],
+   "fare": {
+    "summary": "Sparpreis ~€30–60 · Flex ~€140–180",
+    "note": "One seat Praha → Hamburg on the ComfortJet, then ICE or metronom for 30 min. Reservations are cheap and trains fill up.",
+    "source": "fares.toml (hand-edited estimate)"
+   }
+  },
+  {
+   "id": "leipzig-hannover",
+   "name": "Leipzig → Hannover",
+   "regional": false,
+   "color": "#C0392B",
+   "color_dark": "#EA6F63",
+   "via": "Uelzen · Hannover · Magdeburg · Leipzig · Dresden · Děčín",
+   "geometry": [
+    [
+     50.0831,
+     14.436
+    ],
+    [
+     50.6592,
+     14.0441
+    ],
+    [
+     50.7734,
+     14.2011
+    ],
+    [
+     50.9191,
+     14.1384
+    ],
+    [
+     51.0399,
+     13.7329
+    ],
+    [
+     51.0654,
+     13.7409
+    ],
+    [
+     51.3094,
+     13.2884
+    ],
+    [
+     51.3455,
+     12.3815
+    ],
+    [
+     51.4233,
+     12.2234
+    ],
+    [
+     51.4775,
+     11.9871
+    ],
+    [
+     51.7519,
+     11.9894
+    ],
+    [
+     52.1305,
+     11.627
+    ],
+    [
+     52.3765,
+     9.7411
+    ],
+    [
+     53.2497,
+     10.4199
+    ]
+   ],
+   "path": [
+    "praha-hlavni-nadrazi",
+    "usti-nad-labem-hlavni-nadrazi",
+    "decin-hlavni-nadrazi",
+    "bad-schandau",
+    "dresden-hbf",
+    "dresden-neustadt",
+    "riesa",
+    "leipzig-hbf",
+    "leipzig-halle-flughafen",
+    "halle-saale-hbf",
+    "kothen",
+    "magdeburg-hbf",
+    "hannover-hbf",
+    "luneburg"
+   ],
+   "stats": {
+    "return": {
+     "journeys": 2,
+     "duration_median_min": 522,
+     "duration_min_min": 509,
+     "changes_min": 2,
+     "changes_max": 2,
+     "earliest_dep": "04:56",
+     "latest_arr": "17:25",
+     "every_h": 3.5
+    }
+   },
+   "tags": [],
+   "fare": {
+    "summary": "Sparpreis ~€35–70 · Flex ~€150–190",
+    "note": "The western route via Leipzig and Magdeburg, then Hannover–Lüneburg. A fallback when Berlin–Hamburg is disrupted or sold out.",
+    "source": "fares.toml (hand-edited estimate)"
+   }
+  },
+  {
+   "id": "hannover-uelzen",
+   "name": "Hannover → Uelzen",
+   "regional": false,
+   "color": "#7A4FB5",
+   "color_dark": "#A987DE",
+   "via": "Uelzen · Hannover · Magdeburg · Leipzig · Dresden · Děčín · Ústí nad Labem",
+   "geometry": [
+    [
+     50.0831,
+     14.436
+    ],
+    [
+     50.6592,
+     14.0441
+    ],
+    [
+     50.7734,
+     14.2011
+    ],
+    [
+     50.9191,
+     14.1384
+    ],
+    [
+     51.0399,
+     13.7329
+    ],
+    [
+     51.0654,
+     13.7409
+    ],
+    [
+     51.3094,
+     13.2884
+    ],
+    [
+     51.3455,
+     12.3815
+    ],
+    [
+     51.4233,
+     12.2234
+    ],
+    [
+     51.4775,
+     11.9871
+    ],
+    [
+     51.7519,
+     11.9894
+    ],
+    [
+     52.1305,
+     11.627
+    ],
+    [
+     52.3765,
+     9.7411
+    ],
+    [
+     52.4405,
+     9.7261
+    ],
+    [
+     52.9698,
+     10.553
+    ],
+    [
+     53.0782,
+     10.5741
+    ],
+    [
+     53.2497,
+     10.4199
+    ]
+   ],
+   "path": [
+    "praha-hlavni-nadrazi",
+    "usti-nad-labem-hlavni-nadrazi",
+    "decin-hlavni-nadrazi",
+    "bad-schandau",
+    "dresden-hbf",
+    "dresden-neustadt",
+    "riesa",
+    "leipzig-hbf",
+    "leipzig-halle-flughafen",
+    "halle-saale-hbf",
+    "kothen",
+    "magdeburg-hbf",
+    "hannover-hbf",
+    "langenhagen-mitte",
+    "uelzen",
+    "bad-bevensen",
+    "luneburg"
+   ],
+   "stats": {
+    "return": {
+     "journeys": 3,
+     "duration_median_min": 590,
+     "duration_min_min": 530,
+     "changes_min": 3,
+     "changes_max": 4,
+     "earliest_dep": "06:35",
+     "latest_arr": "20:25",
+     "every_h": 2.3
+    }
+   },
+   "tags": [],
+   "fare": {
+    "summary": "Check int.bahn.de",
+    "note": "No fare estimate for this corridor yet.",
+    "source": "fares.toml (hand-edited estimate)"
+   }
+  },
+  {
+   "id": "berlin-hannover",
+   "name": "Berlin → Hannover",
+   "regional": false,
+   "color": "#B7791F",
+   "color_dark": "#E3A94F",
+   "via": "Hannover · Magdeburg · Berlin · Dresden · Děčín",
+   "geometry": [
+    [
+     50.0831,
+     14.436
+    ],
+    [
+     50.6592,
+     14.0441
+    ],
+    [
+     50.7734,
+     14.2011
+    ],
+    [
+     50.9191,
+     14.1384
+    ],
+    [
+     51.0399,
+     13.7329
+    ],
+    [
+     51.0654,
+     13.7409
+    ],
+    [
+     52.5256,
+     13.3691
+    ],
+    [
+     52.1305,
+     11.627
+    ],
+    [
+     52.3765,
+     9.7411
+    ],
+    [
+     53.2497,
+     10.4199
+    ]
+   ],
+   "path": [
+    "praha-hlavni-nadrazi",
+    "usti-nad-labem-hlavni-nadrazi",
+    "decin-hlavni-nadrazi",
+    "bad-schandau",
+    "dresden-hbf",
+    "dresden-neustadt",
+    "berlin-hbf",
+    "magdeburg-hbf",
+    "hannover-hbf",
+    "luneburg"
+   ],
+   "stats": {
+    "return": {
+     "journeys": 1,
+     "duration_median_min": 595,
+     "duration_min_min": 595,
+     "changes_min": 2,
+     "changes_max": 2,
+     "earliest_dep": "07:30",
+     "latest_arr": "17:25",
+     "every_h": 7.0
+    }
+   },
+   "tags": [],
+   "fare": {
+    "summary": "Check int.bahn.de",
+    "note": "No fare estimate for this corridor yet.",
+    "source": "fares.toml (hand-edited estimate)"
+   }
+  },
+  {
+   "id": "magdeburg-uelzen-regional",
+   "name": "Magdeburg → Uelzen (regional)",
+   "regional": true,
+   "color": "#2F8A57",
+   "color_dark": "#52BA82",
+   "via": "Děčín · Dresden · Leipzig · Magdeburg · Stendal · Uelzen",
+   "geometry": [
+    [
+     50.0831,
+     14.436
+    ],
+    [
+     50.2384,
+     14.314
+    ],
+    [
+     50.453,
+     14.3614
+    ],
+    [
+     50.4264,
+     14.2652
+    ],
+    [
+     50.5097,
+     14.0595
+    ],
+    [
+     50.6592,
+     14.0441
+    ],
+    [
+     50.7734,
+     14.2011
+    ],
+    [
+     50.9191,
+     14.1384
+    ],
+    [
+     51.0399,
+     13.7329
+    ],
+    [
+     51.0556,
+     13.7234
+    ],
+    [
+     51.0654,
+     13.7409
+    ],
+    [
+     51.3169,
+     13.3667
+    ],
+    [
+     51.3439,
+     12.4776
+    ],
+    [
+     51.3455,
+     12.3815
+    ],
+    [
+     51.3963,
+     12.3904
+    ],
+    [
+     51.8846,
+     12.2373
+    ],
+    [
+     52.1454,
+     11.6764
+    ],
+    [
+     52.1488,
+     11.6417
+    ],
+    [
+     52.1305,
+     11.627
+    ],
+    [
+     52.1488,
+     11.6417
+    ],
+    [
+     52.1664,
+     11.658
+    ],
+    [
+     52.1868,
+     11.6479
+    ],
+    [
+     52.5947,
+     11.8544
+    ],
+    [
+     52.8364,
+     11.2645
+    ],
+    [
+     52.8926,
+     10.6556
+    ],
+    [
+     52.9698,
+     10.553
+    ],
+    [
+     53.0782,
+     10.5741
+    ],
+    [
+     53.2497,
+     10.4199
+    ]
+   ],
+   "path": [
+    "praha-hlavni-nadrazi",
+    "kralupy-nad-vltavou",
+    "hnevice",
+    "roudnice-nad-labem",
+    "lovosice",
+    "usti-nad-labem-hlavni-nadrazi",
+    "decin-hlavni-nadrazi",
+    "bad-schandau",
+    "dresden-hbf",
+    "dresden-mitte",
+    "dresden-neustadt",
+    "glaubitz-bahnhof",
+    "leipzig-engelsdorf",
+    "leipzig-hbf",
+    "leipzig-messe",
+    "rosslau-elbe",
+    "magdeburg-herrenkrug",
+    "magdeburg-neustadt",
+    "magdeburg-hbf",
+    "magdeburg-neustadt",
+    "magdeburg-eichenweiler",
+    "magdeburg-rothensee",
+    "stendal-hbf",
+    "pretzier-altm",
+    "wieren",
+    "uelzen",
+    "bad-bevensen",
+    "luneburg"
+   ],
+   "stats": {
+    "outbound": {
+     "journeys": 3,
+     "duration_median_min": 756,
+     "duration_min_min": 712,
+     "changes_min": 5,
+     "changes_max": 6,
+     "earliest_dep": "06:47",
+     "latest_arr": "23:23",
+     "every_h": 2.3
+    },
+    "return": {
+     "journeys": 2,
+     "duration_median_min": 725,
+     "duration_min_min": 695,
+     "changes_min": 5,
+     "changes_max": 6,
+     "earliest_dep": "06:35",
+     "latest_arr": "21:10",
+     "every_h": 3.5
+    }
+   },
+   "tags": [
+    "Regional trains only"
+   ],
+   "fare": {
+    "summary": "CZ part ~€10–15 + Deutschlandticket",
+    "note": "German legs are all regional trains, so an existing Deutschlandticket covers them. The Czech part needs its own ticket (cd.cz).",
+    "source": "fares.toml (hand-edited estimate)"
+   }
+  }
+ ],
+ "fare_footnote": "BahnCard 25 takes 25% (BahnCard 50: 50% on Flexpreis, 25% on Sparpreis) off the German share only; the Czech share is full price. Flexpreis figures are estimates for a through ticket in 2nd class. Czech fares at cd.cz can be cheaper for the same train.",
+ "journeys": {
+  "outbound": [
+   {
+    "corridor": "berlin-hamburg",
+    "dep": "06:31",
+    "arr": "13:28",
+    "duration_min": 417,
+    "changes": 1,
+    "legs": [
+     {
+      "from": "praha-hlavni-nadrazi",
+      "to": "hamburg-hbf",
+      "dep": "06:31",
+      "arr": "12:24",
+      "dep_s": 23460,
+      "arr_s": 44640,
+      "label": "RJ 384",
+      "category": "RJ",
+      "route_type": 102,
+      "long_distance": true,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt",
+       "de_rv"
+      ],
+      "stops": [
+       "praha-hlavni-nadrazi",
+       "praha-holesovice",
+       "usti-nad-labem-hlavni-nadrazi",
+       "decin-hlavni-nadrazi",
+       "bad-schandau",
+       "dresden-hbf",
+       "dresden-neustadt",
+       "s-sudkreuz-bhf",
+       "berlin-hbf",
+       "s-spandau-bhf",
+       "hamburg-hbf"
+      ],
+      "joined_at": [
+       {
+        "at": "bad-schandau",
+        "label": "EC 27",
+        "feed": "de_rv"
+       }
+      ]
+     },
+     {
+      "from": "hamburg-hbf",
+      "to": "luneburg",
+      "dep": "13:01",
+      "arr": "13:28",
+      "dep_s": 46860,
+      "arr_s": 48480,
+      "label": "ICE 25",
+      "category": "ICE",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "hamburg-hbf",
+       "hamburg-harburg-s",
+       "luneburg"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": [
+     "RJ 384 runs through Bad Schandau; the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "magdeburg-uelzen-regional",
+    "dep": "06:47",
+    "arr": "19:23",
+    "duration_min": 756,
+    "changes": 5,
+    "legs": [
+     {
+      "from": "praha-hlavni-nadrazi",
+      "to": "decin-hlavni-nadrazi",
+      "dep": "06:47",
+      "arr": "08:32",
+      "dep_s": 24420,
+      "arr_s": 30720,
+      "label": "R 696",
+      "category": "R",
+      "route_type": 103,
+      "long_distance": false,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt"
+      ],
+      "stops": [
+       "praha-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-podbaba",
+       "kralupy-nad-vltavou",
+       "hnevice",
+       "roudnice-nad-labem",
+       "bohusovice-nad-ohri",
+       "lovosice",
+       "usti-nad-labem-hlavni-nadrazi",
+       "decin-hlavni-nadrazi"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "decin-hlavni-nadrazi",
+      "to": "dresden-hbf",
+      "dep": "09:36",
+      "arr": "10:24",
+      "dep_s": 34560,
+      "arr_s": 37440,
+      "label": "RE20",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "decin-hlavni-nadrazi",
+       "schona-gr",
+       "bad-schandau",
+       "dresden-hbf"
+      ],
+      "joined_at": [
+       {
+        "at": "schona-gr",
+        "label": "RE20",
+        "feed": "de_rv"
+       }
+      ]
+     },
+     {
+      "from": "dresden-hbf",
+      "to": "leipzig-hbf",
+      "dep": "11:12",
+      "arr": "12:50",
+      "dep_s": 40320,
+      "arr_s": 46200,
+      "label": "RE50",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "dresden-hbf",
+       "dresden-mitte",
+       "dresden-neustadt",
+       "radebeul-ost",
+       "coswig-bahnhof",
+       "weinbohla-hp",
+       "niederau",
+       "priestewitz",
+       "nunchritz",
+       "glaubitz-bahnhof",
+       "riesa",
+       "oschatz",
+       "dahlen-sachs",
+       "kuhren",
+       "wurzen",
+       "borsdorf-sachs",
+       "leipzig-engelsdorf",
+       "leipzig-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "leipzig-hbf",
+      "to": "magdeburg-hbf",
+      "dep": "13:21",
+      "arr": "14:55",
+      "dep_s": 48060,
+      "arr_s": 53700,
+      "label": "RE13",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "leipzig-hbf",
+       "leipzig-messe",
+       "delitzsch-unt-bf",
+       "bitterfeld",
+       "wolfen-bitterfeld",
+       "dessau-hbf",
+       "rosslau-elbe",
+       "rodleben",
+       "zerbst-anhalt",
+       "gutergluck",
+       "lubs-magdeburg",
+       "prodel",
+       "gommern",
+       "wahlitz",
+       "konigsborn",
+       "biederitz",
+       "magdeburg-herrenkrug",
+       "magdeburg-neustadt",
+       "magdeburg-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "magdeburg-hbf",
+      "to": "uelzen",
+      "dep": "15:40",
+      "arr": "17:48",
+      "dep_s": 56400,
+      "arr_s": 64080,
+      "label": "RE20",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "magdeburg-hbf",
+       "magdeburg-neustadt",
+       "magdeburg-eichenweiler",
+       "magdeburg-rothensee",
+       "wolmirstedt",
+       "zielitz-ort",
+       "tangerhutte",
+       "stendal-hbf",
+       "kladen-stendal",
+       "hohenwulsch",
+       "brunau-packebusch",
+       "fleetmark",
+       "pretzier-altm",
+       "salzwedel",
+       "schnega",
+       "soltendieck",
+       "wieren",
+       "uelzen"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "uelzen",
+      "to": "luneburg",
+      "dep": "19:00",
+      "arr": "19:23",
+      "dep_s": 68400,
+      "arr_s": 69780,
+      "label": "RE3",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "uelzen",
+       "bad-bevensen",
+       "bienenbuttel",
+       "luneburg"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": [
+     "RE20 runs through Schöna(Gr); the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "magdeburg-uelzen-regional",
+    "dep": "07:31",
+    "arr": "19:23",
+    "duration_min": 712,
+    "changes": 6,
+    "legs": [
+     {
+      "from": "praha-hlavni-nadrazi",
+      "to": "usti-nad-labem-hlavni-nadrazi",
+      "dep": "07:31",
+      "arr": "08:42",
+      "dep_s": 27060,
+      "arr_s": 31320,
+      "label": "R 616",
+      "category": "R",
+      "route_type": 103,
+      "long_distance": false,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt"
+      ],
+      "stops": [
+       "praha-hlavni-nadrazi",
+       "praha-holesovice",
+       "usti-nad-labem-hlavni-nadrazi"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "usti-nad-labem-hlavni-nadrazi",
+      "to": "bad-schandau",
+      "dep": "09:19",
+      "arr": "09:54",
+      "dep_s": 33540,
+      "arr_s": 35670,
+      "label": "Os 5274",
+      "category": "Os",
+      "route_type": 106,
+      "long_distance": false,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt"
+      ],
+      "stops": [
+       "usti-nad-labem-hlavni-nadrazi",
+       "decin-hlavni-nadrazi",
+       "bad-schandau"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "bad-schandau",
+      "to": "dresden-hbf",
+      "dep": "10:14",
+      "arr": "10:58",
+      "dep_s": 36840,
+      "arr_s": 39480,
+      "label": "S1",
+      "category": "S",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "bad-schandau",
+       "konigstein-bahnhof",
+       "kurort-rathen",
+       "stadt-wehlen-bahnhof",
+       "obervogelgesang",
+       "pirna",
+       "heidenau-grosssedlitz",
+       "heidenau-sud",
+       "heidenau",
+       "dresden-zschachwitz",
+       "dresden-niedersedlitz",
+       "dresden-dobritz",
+       "dresden-reick",
+       "dresden-strehlen",
+       "dresden-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "dresden-hbf",
+      "to": "leipzig-hbf",
+      "dep": "12:12",
+      "arr": "13:50",
+      "dep_s": 43920,
+      "arr_s": 49800,
+      "label": "RE50",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "dresden-hbf",
+       "dresden-mitte",
+       "dresden-neustadt",
+       "radebeul-ost",
+       "coswig-bahnhof",
+       "weinbohla-hp",
+       "niederau",
+       "priestewitz",
+       "nunchritz",
+       "glaubitz-bahnhof",
+       "riesa",
+       "oschatz",
+       "dahlen-sachs",
+       "kuhren",
+       "wurzen",
+       "borsdorf-sachs",
+       "leipzig-engelsdorf",
+       "leipzig-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "leipzig-hbf",
+      "to": "magdeburg-hbf",
+      "dep": "14:21",
+      "arr": "15:55",
+      "dep_s": 51660,
+      "arr_s": 57300,
+      "label": "RE13",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "leipzig-hbf",
+       "leipzig-messe",
+       "delitzsch-unt-bf",
+       "bitterfeld",
+       "wolfen-bitterfeld",
+       "dessau-hbf",
+       "rosslau-elbe",
+       "rodleben",
+       "zerbst-anhalt",
+       "gutergluck",
+       "lubs-magdeburg",
+       "prodel",
+       "gommern",
+       "wahlitz",
+       "konigsborn",
+       "biederitz",
+       "magdeburg-herrenkrug",
+       "magdeburg-neustadt",
+       "magdeburg-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "magdeburg-hbf",
+      "to": "uelzen",
+      "dep": "16:41",
+      "arr": "18:41",
+      "dep_s": 60060,
+      "arr_s": 67260,
+      "label": "RE20",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "magdeburg-hbf",
+       "magdeburg-neustadt",
+       "magdeburg-eichenweiler",
+       "magdeburg-rothensee",
+       "wolmirstedt",
+       "zielitz-ort",
+       "tangerhutte",
+       "stendal-hbf",
+       "steinfeld-stendal",
+       "kladen-stendal",
+       "hohenwulsch",
+       "brunau-packebusch",
+       "fleetmark",
+       "pretzier-altm",
+       "salzwedel",
+       "schnega",
+       "soltendieck",
+       "wieren",
+       "stederdorf-wrestedt",
+       "uelzen"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "uelzen",
+      "to": "luneburg",
+      "dep": "19:00",
+      "arr": "19:23",
+      "dep_s": 68400,
+      "arr_s": 69780,
+      "label": "RE3",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "uelzen",
+       "bad-bevensen",
+       "bienenbuttel",
+       "luneburg"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": []
+   },
+   {
+    "corridor": "berlin-hamburg",
+    "dep": "08:31",
+    "arr": "15:28",
+    "duration_min": 417,
+    "changes": 1,
+    "legs": [
+     {
+      "from": "praha-hlavni-nadrazi",
+      "to": "hamburg-hbf",
+      "dep": "08:31",
+      "arr": "14:25",
+      "dep_s": 30660,
+      "arr_s": 51900,
+      "label": "RJ 178",
+      "category": "RJ",
+      "route_type": 102,
+      "long_distance": true,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt",
+       "de_rv"
+      ],
+      "stops": [
+       "praha-hlavni-nadrazi",
+       "praha-holesovice",
+       "usti-nad-labem-hlavni-nadrazi",
+       "decin-hlavni-nadrazi",
+       "bad-schandau",
+       "dresden-hbf",
+       "dresden-neustadt",
+       "s-sudkreuz-bhf",
+       "berlin-hbf",
+       "s-spandau-bhf",
+       "hamburg-hbf"
+      ],
+      "joined_at": [
+       {
+        "at": "bad-schandau",
+        "label": "EC 27",
+        "feed": "de_rv"
+       }
+      ]
+     },
+     {
+      "from": "hamburg-hbf",
+      "to": "luneburg",
+      "dep": "15:01",
+      "arr": "15:28",
+      "dep_s": 54060,
+      "arr_s": 55680,
+      "label": "ICE 25",
+      "category": "ICE",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "hamburg-hbf",
+       "hamburg-harburg-s",
+       "luneburg"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": [
+     "RJ 178 runs through Bad Schandau; the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "magdeburg-uelzen-regional",
+    "dep": "08:47",
+    "arr": "23:23",
+    "duration_min": 876,
+    "changes": 6,
+    "legs": [
+     {
+      "from": "praha-hlavni-nadrazi",
+      "to": "decin-hlavni-nadrazi",
+      "dep": "08:47",
+      "arr": "10:32",
+      "dep_s": 31620,
+      "arr_s": 37920,
+      "label": "R 692",
+      "category": "R",
+      "route_type": 103,
+      "long_distance": false,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt"
+      ],
+      "stops": [
+       "praha-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-podbaba",
+       "kralupy-nad-vltavou",
+       "hnevice",
+       "roudnice-nad-labem",
+       "bohusovice-nad-ohri",
+       "lovosice",
+       "usti-nad-labem-hlavni-nadrazi",
+       "decin-hlavni-nadrazi"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "decin-hlavni-nadrazi",
+      "to": "bad-schandau",
+      "dep": "12:41",
+      "arr": "13:09",
+      "dep_s": 45660,
+      "arr_s": 47340,
+      "label": "U28",
+      "category": "U",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "decin-hlavni-nadrazi",
+       "decin-priper",
+       "decin-prostredni-zleb",
+       "decin-certova-voda",
+       "dolni-zleb-zastavka",
+       "dolni-zleb",
+       "schona-gr",
+       "schona",
+       "schmilka-hirschmuhle",
+       "krippen",
+       "bad-schandau"
+      ],
+      "joined_at": [
+       {
+        "at": "schona-gr",
+        "label": "U28",
+        "feed": "de_rv"
+       }
+      ]
+     },
+     {
+      "from": "bad-schandau",
+      "to": "dresden-hbf",
+      "dep": "13:44",
+      "arr": "14:28",
+      "dep_s": 49440,
+      "arr_s": 52080,
+      "label": "S1",
+      "category": "S",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "bad-schandau",
+       "konigstein-bahnhof",
+       "kurort-rathen",
+       "stadt-wehlen-bahnhof",
+       "obervogelgesang",
+       "pirna",
+       "heidenau-grosssedlitz",
+       "heidenau-sud",
+       "heidenau",
+       "dresden-zschachwitz",
+       "dresden-niedersedlitz",
+       "dresden-dobritz",
+       "dresden-reick",
+       "dresden-strehlen",
+       "dresden-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "dresden-hbf",
+      "to": "leipzig-hbf",
+      "dep": "15:12",
+      "arr": "16:50",
+      "dep_s": 54720,
+      "arr_s": 60600,
+      "label": "RE50",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "dresden-hbf",
+       "dresden-mitte",
+       "dresden-neustadt",
+       "radebeul-ost",
+       "coswig-bahnhof",
+       "weinbohla-hp",
+       "niederau",
+       "priestewitz",
+       "nunchritz",
+       "glaubitz-bahnhof",
+       "riesa",
+       "oschatz",
+       "dahlen-sachs",
+       "kuhren",
+       "wurzen",
+       "borsdorf-sachs",
+       "leipzig-engelsdorf",
+       "leipzig-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "leipzig-hbf",
+      "to": "magdeburg-hbf",
+      "dep": "17:21",
+      "arr": "18:55",
+      "dep_s": 62460,
+      "arr_s": 68100,
+      "label": "RE13",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "leipzig-hbf",
+       "leipzig-messe",
+       "delitzsch-unt-bf",
+       "bitterfeld",
+       "wolfen-bitterfeld",
+       "dessau-hbf",
+       "rosslau-elbe",
+       "rodleben",
+       "zerbst-anhalt",
+       "gutergluck",
+       "lubs-magdeburg",
+       "prodel",
+       "gommern",
+       "wahlitz",
+       "konigsborn",
+       "biederitz",
+       "magdeburg-herrenkrug",
+       "magdeburg-neustadt",
+       "magdeburg-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "magdeburg-hbf",
+      "to": "uelzen",
+      "dep": "20:41",
+      "arr": "22:41",
+      "dep_s": 74460,
+      "arr_s": 81660,
+      "label": "RE20",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "magdeburg-hbf",
+       "magdeburg-neustadt",
+       "magdeburg-eichenweiler",
+       "magdeburg-rothensee",
+       "wolmirstedt",
+       "zielitz-ort",
+       "tangerhutte",
+       "stendal-hbf",
+       "steinfeld-stendal",
+       "kladen-stendal",
+       "hohenwulsch",
+       "brunau-packebusch",
+       "fleetmark",
+       "pretzier-altm",
+       "salzwedel",
+       "schnega",
+       "soltendieck",
+       "wieren",
+       "stederdorf-wrestedt",
+       "uelzen"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "uelzen",
+      "to": "luneburg",
+      "dep": "23:00",
+      "arr": "23:23",
+      "dep_s": 82800,
+      "arr_s": 84180,
+      "label": "RB31",
+      "category": "RB",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "uelzen",
+       "bad-bevensen",
+       "bienenbuttel",
+       "luneburg"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": [
+     "U28 runs through Schöna(Gr); the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "berlin-hamburg",
+    "dep": "10:31",
+    "arr": "17:28",
+    "duration_min": 417,
+    "changes": 1,
+    "legs": [
+     {
+      "from": "praha-hlavni-nadrazi",
+      "to": "hamburg-hbf",
+      "dep": "10:31",
+      "arr": "16:24",
+      "dep_s": 37860,
+      "arr_s": 59040,
+      "label": "RJ 382",
+      "category": "RJ",
+      "route_type": 102,
+      "long_distance": true,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt",
+       "de_rv"
+      ],
+      "stops": [
+       "praha-hlavni-nadrazi",
+       "praha-holesovice",
+       "usti-nad-labem-hlavni-nadrazi",
+       "decin-hlavni-nadrazi",
+       "bad-schandau",
+       "dresden-hbf",
+       "dresden-neustadt",
+       "s-sudkreuz-bhf",
+       "berlin-hbf",
+       "hamburg-hbf"
+      ],
+      "joined_at": [
+       {
+        "at": "bad-schandau",
+        "label": "EC 27",
+        "feed": "de_rv"
+       }
+      ]
+     },
+     {
+      "from": "hamburg-hbf",
+      "to": "luneburg",
+      "dep": "17:01",
+      "arr": "17:28",
+      "dep_s": 61260,
+      "arr_s": 62880,
+      "label": "ICE 25",
+      "category": "ICE",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "hamburg-hbf",
+       "hamburg-harburg-s",
+       "luneburg"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": [
+     "RJ 382 runs through Bad Schandau; the timetable data splits it there, treated here as one train."
+    ]
+   }
+  ],
+  "return": [
+   {
+    "corridor": "leipzig-hannover",
+    "dep": "04:56",
+    "arr": "13:25",
+    "duration_min": 509,
+    "changes": 2,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "hannover-hbf",
+      "dep": "04:56",
+      "arr": "05:50",
+      "dep_s": 17760,
+      "arr_s": 21000,
+      "label": "ICE 20",
+      "category": "ICE",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "luneburg",
+       "uelzen",
+       "hannover-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "hannover-hbf",
+      "to": "dresden-hbf",
+      "dep": "06:37",
+      "arr": "10:50",
+      "dep_s": 23820,
+      "arr_s": 39000,
+      "label": "IC 55",
+      "category": "IC",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "hannover-hbf",
+       "braunschweig-hbf",
+       "helmstedt",
+       "magdeburg-hbf",
+       "kothen",
+       "halle-saale-hbf",
+       "leipzig-halle-flughafen",
+       "leipzig-hbf",
+       "riesa",
+       "dresden-neustadt",
+       "dresden-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "dresden-hbf",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "11:10",
+      "arr": "13:25",
+      "dep_s": 40200,
+      "arr_s": 48300,
+      "label": "RJ",
+      "category": "RJ",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_fv",
+       "de_rv"
+      ],
+      "stops": [
+       "dresden-hbf",
+       "bad-schandau",
+       "schona-gr",
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": [
+       {
+        "at": "decin-hlavni-nadrazi",
+        "label": "RJ",
+        "feed": "de_fv"
+       }
+      ]
+     }
+    ],
+    "notes": [
+     "RJ runs through Děčín hlavní nádraží; the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "berlin-hamburg",
+    "dep": "06:31",
+    "arr": "13:25",
+    "duration_min": 414,
+    "changes": 1,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "hamburg-hbf",
+      "dep": "06:31",
+      "arr": "07:05",
+      "dep_s": 23460,
+      "arr_s": 25500,
+      "label": "RE3",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "luneburg",
+       "winsen-luhe",
+       "hamburg-harburg-s",
+       "hamburg-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "hamburg-hbf",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "07:33",
+      "arr": "13:25",
+      "dep_s": 27180,
+      "arr_s": 48300,
+      "label": "RJ",
+      "category": "RJ",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_fv",
+       "de_rv"
+      ],
+      "stops": [
+       "hamburg-hbf",
+       "s-spandau-bhf",
+       "berlin-hbf",
+       "s-sudkreuz-bhf",
+       "dresden-neustadt",
+       "dresden-hbf",
+       "bad-schandau",
+       "schona-gr",
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": [
+       {
+        "at": "decin-hlavni-nadrazi",
+        "label": "RJ",
+        "feed": "de_fv"
+       }
+      ]
+     }
+    ],
+    "notes": [
+     "RJ runs through Děčín hlavní nádraží; the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "hannover-uelzen",
+    "dep": "06:35",
+    "arr": "16:25",
+    "duration_min": 590,
+    "changes": 4,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "uelzen",
+      "dep": "06:35",
+      "arr": "06:57",
+      "dep_s": 23700,
+      "arr_s": 25020,
+      "label": "RE3",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "luneburg",
+       "bienenbuttel",
+       "bad-bevensen",
+       "uelzen"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "uelzen",
+      "to": "hannover-hbf",
+      "dep": "07:14",
+      "arr": "08:15",
+      "dep_s": 26040,
+      "arr_s": 29700,
+      "label": "RE2",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Nord",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "uelzen",
+       "suderburg",
+       "unterluss",
+       "eschede",
+       "celle",
+       "grossburgwedel",
+       "isernhagen",
+       "langenhagen-mitte",
+       "hannover-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "hannover-hbf",
+      "to": "dresden-hbf",
+      "dep": "08:37",
+      "arr": "12:50",
+      "dep_s": 31020,
+      "arr_s": 46200,
+      "label": "IC 55",
+      "category": "IC",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "hannover-hbf",
+       "braunschweig-hbf",
+       "magdeburg-hbf",
+       "kothen",
+       "halle-saale-hbf",
+       "leipzig-halle-flughafen",
+       "leipzig-hbf",
+       "riesa",
+       "dresden-neustadt",
+       "dresden-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "dresden-hbf",
+      "to": "usti-nad-labem-hlavni-nadrazi",
+      "dep": "13:10",
+      "arr": "14:11",
+      "dep_s": 47400,
+      "arr_s": 51060,
+      "label": "RJ",
+      "category": "RJ",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_fv",
+       "de_rv"
+      ],
+      "stops": [
+       "dresden-hbf",
+       "bad-schandau",
+       "schona-gr",
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi"
+      ],
+      "joined_at": [
+       {
+        "at": "decin-hlavni-nadrazi",
+        "label": "RJ",
+        "feed": "de_fv"
+       }
+      ]
+     },
+     {
+      "from": "usti-nad-labem-hlavni-nadrazi",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "15:14",
+      "arr": "16:25",
+      "dep_s": 54840,
+      "arr_s": 59100,
+      "label": "R 613",
+      "category": "R",
+      "route_type": 103,
+      "long_distance": false,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt"
+      ],
+      "stops": [
+       "usti-nad-labem-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": [
+     "RJ runs through Děčín hlavní nádraží; the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "magdeburg-uelzen-regional",
+    "dep": "06:35",
+    "arr": "19:10",
+    "duration_min": 755,
+    "changes": 6,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "uelzen",
+      "dep": "06:35",
+      "arr": "06:57",
+      "dep_s": 23700,
+      "arr_s": 25020,
+      "label": "RE3",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "luneburg",
+       "bienenbuttel",
+       "bad-bevensen",
+       "uelzen"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "uelzen",
+      "to": "magdeburg-hbf",
+      "dep": "07:17",
+      "arr": "09:15",
+      "dep_s": 26220,
+      "arr_s": 33300,
+      "label": "RE20",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "uelzen",
+       "stederdorf-wrestedt",
+       "wieren",
+       "soltendieck",
+       "schnega",
+       "salzwedel",
+       "pretzier-altm",
+       "fleetmark",
+       "brunau-packebusch",
+       "hohenwulsch",
+       "kladen-stendal",
+       "steinfeld-stendal",
+       "stendal-hbf",
+       "tangerhutte",
+       "zielitz-ort",
+       "wolmirstedt",
+       "magdeburg-rothensee",
+       "magdeburg-eichenweiler",
+       "magdeburg-neustadt",
+       "magdeburg-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "magdeburg-hbf",
+      "to": "leipzig-hbf",
+      "dep": "10:06",
+      "arr": "11:39",
+      "dep_s": 36360,
+      "arr_s": 41940,
+      "label": "RE13",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "magdeburg-hbf",
+       "magdeburg-neustadt",
+       "magdeburg-herrenkrug",
+       "biederitz",
+       "konigsborn",
+       "wahlitz",
+       "gommern",
+       "prodel",
+       "lubs-magdeburg",
+       "gutergluck",
+       "zerbst-anhalt",
+       "rodleben",
+       "rosslau-elbe",
+       "dessau-hbf",
+       "wolfen-bitterfeld",
+       "bitterfeld",
+       "delitzsch-unt-bf",
+       "leipzig-messe",
+       "leipzig-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "leipzig-hbf",
+      "to": "dresden-hbf",
+      "dep": "12:00",
+      "arr": "13:34",
+      "dep_s": 43200,
+      "arr_s": 48840,
+      "label": "RE50",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "leipzig-hbf",
+       "leipzig-engelsdorf",
+       "borsdorf-sachs",
+       "wurzen",
+       "kuhren",
+       "dahlen-sachs",
+       "oschatz",
+       "riesa",
+       "glaubitz-bahnhof",
+       "nunchritz",
+       "priestewitz",
+       "niederau",
+       "weinbohla-hp",
+       "coswig-bahnhof",
+       "radebeul-ost",
+       "dresden-neustadt",
+       "dresden-mitte",
+       "dresden-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "dresden-hbf",
+      "to": "bad-schandau",
+      "dep": "13:59",
+      "arr": "14:43",
+      "dep_s": 50340,
+      "arr_s": 52980,
+      "label": "S1",
+      "category": "S",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "dresden-hbf",
+       "dresden-strehlen",
+       "dresden-reick",
+       "dresden-dobritz",
+       "dresden-niedersedlitz",
+       "dresden-zschachwitz",
+       "heidenau",
+       "heidenau-sud",
+       "heidenau-grosssedlitz",
+       "pirna",
+       "obervogelgesang",
+       "stadt-wehlen-bahnhof",
+       "kurort-rathen",
+       "konigstein-bahnhof",
+       "bad-schandau"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "bad-schandau",
+      "to": "decin-hlavni-nadrazi",
+      "dep": "16:26",
+      "arr": "16:44",
+      "dep_s": 59160,
+      "arr_s": 60240,
+      "label": "CD 083",
+      "category": "CD",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "ZVON Oberlausitz-Niederschlesien",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "bad-schandau",
+       "decin-hlavni-nadrazi"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "decin-hlavni-nadrazi",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "17:25",
+      "arr": "19:10",
+      "dep_s": 62700,
+      "arr_s": 69000,
+      "label": "R 693",
+      "category": "R",
+      "route_type": 103,
+      "long_distance": false,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt"
+      ],
+      "stops": [
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi",
+       "lovosice",
+       "bohusovice-nad-ohri",
+       "roudnice-nad-labem",
+       "hnevice",
+       "kralupy-nad-vltavou",
+       "praha-podbaba",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": []
+   },
+   {
+    "corridor": "berlin-hannover",
+    "dep": "07:30",
+    "arr": "17:25",
+    "duration_min": 595,
+    "changes": 2,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "hannover-hbf",
+      "dep": "07:30",
+      "arr": "08:23",
+      "dep_s": 27000,
+      "arr_s": 30180,
+      "label": "ICE 25",
+      "category": "ICE",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "luneburg",
+       "hannover-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "hannover-hbf",
+      "to": "berlin-hbf",
+      "dep": "09:22",
+      "arr": "12:17",
+      "dep_s": 33720,
+      "arr_s": 44220,
+      "label": "ICE 19",
+      "category": "ICE",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "hannover-hbf",
+       "magdeburg-hbf",
+       "berlin-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "berlin-hbf",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "13:28",
+      "arr": "17:25",
+      "dep_s": 48480,
+      "arr_s": 62700,
+      "label": "RJ",
+      "category": "RJ",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_fv",
+       "de_rv"
+      ],
+      "stops": [
+       "berlin-hbf",
+       "s-sudkreuz-bhf",
+       "dresden-neustadt",
+       "dresden-hbf",
+       "bad-schandau",
+       "schona-gr",
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": [
+       {
+        "at": "decin-hlavni-nadrazi",
+        "label": "RJ",
+        "feed": "de_fv"
+       }
+      ]
+     }
+    ],
+    "notes": [
+     "RJ runs through Děčín hlavní nádraží; the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "leipzig-hannover",
+    "dep": "08:30",
+    "arr": "17:25",
+    "duration_min": 535,
+    "changes": 2,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "hannover-hbf",
+      "dep": "08:30",
+      "arr": "09:23",
+      "dep_s": 30600,
+      "arr_s": 33780,
+      "label": "ICE 25",
+      "category": "ICE",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "luneburg",
+       "hannover-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "hannover-hbf",
+      "to": "dresden-hbf",
+      "dep": "10:37",
+      "arr": "14:50",
+      "dep_s": 38220,
+      "arr_s": 53400,
+      "label": "IC 55",
+      "category": "IC",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "hannover-hbf",
+       "braunschweig-hbf",
+       "magdeburg-hbf",
+       "kothen",
+       "halle-saale-hbf",
+       "leipzig-halle-flughafen",
+       "leipzig-hbf",
+       "riesa",
+       "dresden-neustadt",
+       "dresden-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "dresden-hbf",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "15:10",
+      "arr": "17:25",
+      "dep_s": 54600,
+      "arr_s": 62700,
+      "label": "RJ",
+      "category": "RJ",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_fv",
+       "de_rv"
+      ],
+      "stops": [
+       "dresden-hbf",
+       "bad-schandau",
+       "schona-gr",
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": [
+       {
+        "at": "decin-hlavni-nadrazi",
+        "label": "RJ",
+        "feed": "de_fv"
+       }
+      ]
+     }
+    ],
+    "notes": [
+     "RJ runs through Děčín hlavní nádraží; the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "berlin-hamburg",
+    "dep": "08:31",
+    "arr": "16:25",
+    "duration_min": 474,
+    "changes": 2,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "hamburg-hbf",
+      "dep": "08:31",
+      "arr": "09:05",
+      "dep_s": 30660,
+      "arr_s": 32700,
+      "label": "RE3",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "luneburg",
+       "winsen-luhe",
+       "hamburg-harburg-s",
+       "hamburg-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "hamburg-hbf",
+      "to": "usti-nad-labem-hlavni-nadrazi",
+      "dep": "09:34",
+      "arr": "14:11",
+      "dep_s": 34440,
+      "arr_s": 51060,
+      "label": "RJ",
+      "category": "RJ",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_fv",
+       "de_rv"
+      ],
+      "stops": [
+       "hamburg-hbf",
+       "s-spandau-bhf",
+       "berlin-hbf",
+       "s-sudkreuz-bhf",
+       "dresden-neustadt",
+       "dresden-hbf",
+       "bad-schandau",
+       "schona-gr",
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi"
+      ],
+      "joined_at": [
+       {
+        "at": "decin-hlavni-nadrazi",
+        "label": "RJ",
+        "feed": "de_fv"
+       }
+      ]
+     },
+     {
+      "from": "usti-nad-labem-hlavni-nadrazi",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "15:14",
+      "arr": "16:25",
+      "dep_s": 54840,
+      "arr_s": 59100,
+      "label": "R 613",
+      "category": "R",
+      "route_type": 103,
+      "long_distance": false,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt"
+      ],
+      "stops": [
+       "usti-nad-labem-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": [
+     "RJ runs through Děčín hlavní nádraží; the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "hannover-uelzen",
+    "dep": "08:35",
+    "arr": "17:25",
+    "duration_min": 530,
+    "changes": 3,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "uelzen",
+      "dep": "08:35",
+      "arr": "08:57",
+      "dep_s": 30900,
+      "arr_s": 32220,
+      "label": "RE3",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "luneburg",
+       "bienenbuttel",
+       "bad-bevensen",
+       "uelzen"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "uelzen",
+      "to": "hannover-hbf",
+      "dep": "09:14",
+      "arr": "10:15",
+      "dep_s": 33240,
+      "arr_s": 36900,
+      "label": "RE2",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Nord",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "uelzen",
+       "suderburg",
+       "unterluss",
+       "eschede",
+       "celle",
+       "grossburgwedel",
+       "isernhagen",
+       "langenhagen-mitte",
+       "hannover-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "hannover-hbf",
+      "to": "dresden-hbf",
+      "dep": "10:37",
+      "arr": "14:50",
+      "dep_s": 38220,
+      "arr_s": 53400,
+      "label": "IC 55",
+      "category": "IC",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "hannover-hbf",
+       "braunschweig-hbf",
+       "magdeburg-hbf",
+       "kothen",
+       "halle-saale-hbf",
+       "leipzig-halle-flughafen",
+       "leipzig-hbf",
+       "riesa",
+       "dresden-neustadt",
+       "dresden-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "dresden-hbf",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "15:10",
+      "arr": "17:25",
+      "dep_s": 54600,
+      "arr_s": 62700,
+      "label": "RJ",
+      "category": "RJ",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_fv",
+       "de_rv"
+      ],
+      "stops": [
+       "dresden-hbf",
+       "bad-schandau",
+       "schona-gr",
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": [
+       {
+        "at": "decin-hlavni-nadrazi",
+        "label": "RJ",
+        "feed": "de_fv"
+       }
+      ]
+     }
+    ],
+    "notes": [
+     "RJ runs through Děčín hlavní nádraží; the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "magdeburg-uelzen-regional",
+    "dep": "09:35",
+    "arr": "21:10",
+    "duration_min": 695,
+    "changes": 5,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "uelzen",
+      "dep": "09:35",
+      "arr": "09:57",
+      "dep_s": 34500,
+      "arr_s": 35820,
+      "label": "RE3",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "luneburg",
+       "bienenbuttel",
+       "bad-bevensen",
+       "uelzen"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "uelzen",
+      "to": "magdeburg-hbf",
+      "dep": "10:17",
+      "arr": "12:15",
+      "dep_s": 37020,
+      "arr_s": 44100,
+      "label": "RE20",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "uelzen",
+       "stederdorf-wrestedt",
+       "wieren",
+       "soltendieck",
+       "schnega",
+       "salzwedel",
+       "pretzier-altm",
+       "fleetmark",
+       "brunau-packebusch",
+       "hohenwulsch",
+       "kladen-stendal",
+       "stendal-hbf",
+       "tangerhutte",
+       "zielitz-ort",
+       "wolmirstedt",
+       "magdeburg-rothensee",
+       "magdeburg-eichenweiler",
+       "magdeburg-neustadt",
+       "magdeburg-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "magdeburg-hbf",
+      "to": "leipzig-hbf",
+      "dep": "13:04",
+      "arr": "14:39",
+      "dep_s": 47040,
+      "arr_s": 52740,
+      "label": "RE13",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "magdeburg-hbf",
+       "magdeburg-neustadt",
+       "magdeburg-herrenkrug",
+       "biederitz",
+       "konigsborn",
+       "wahlitz",
+       "gommern",
+       "prodel",
+       "lubs-magdeburg",
+       "gutergluck",
+       "zerbst-anhalt",
+       "rodleben",
+       "rosslau-elbe",
+       "dessau-hbf",
+       "wolfen-bitterfeld",
+       "bitterfeld",
+       "delitzsch-unt-bf",
+       "leipzig-messe",
+       "leipzig-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "leipzig-hbf",
+      "to": "dresden-hbf",
+      "dep": "15:00",
+      "arr": "16:34",
+      "dep_s": 54000,
+      "arr_s": 59640,
+      "label": "RE50",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "leipzig-hbf",
+       "leipzig-engelsdorf",
+       "borsdorf-sachs",
+       "wurzen",
+       "kuhren",
+       "dahlen-sachs",
+       "oschatz",
+       "riesa",
+       "glaubitz-bahnhof",
+       "nunchritz",
+       "priestewitz",
+       "niederau",
+       "weinbohla-hp",
+       "coswig-bahnhof",
+       "radebeul-ost",
+       "dresden-neustadt",
+       "dresden-mitte",
+       "dresden-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "dresden-hbf",
+      "to": "decin-hlavni-nadrazi",
+      "dep": "17:35",
+      "arr": "18:32",
+      "dep_s": 63300,
+      "arr_s": 66720,
+      "label": "RE20",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Südost",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "dresden-hbf",
+       "bad-schandau",
+       "schona-gr",
+       "decin-hlavni-nadrazi"
+      ],
+      "joined_at": [
+       {
+        "at": "schona-gr",
+        "label": "RE20",
+        "feed": "de_rv"
+       }
+      ]
+     },
+     {
+      "from": "decin-hlavni-nadrazi",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "19:25",
+      "arr": "21:10",
+      "dep_s": 69900,
+      "arr_s": 76200,
+      "label": "R 697",
+      "category": "R",
+      "route_type": 103,
+      "long_distance": false,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt"
+      ],
+      "stops": [
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi",
+       "lovosice",
+       "bohusovice-nad-ohri",
+       "roudnice-nad-labem",
+       "hnevice",
+       "kralupy-nad-vltavou",
+       "praha-podbaba",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": [
+     "RE20 runs through Schöna(Gr); the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "berlin-hamburg",
+    "dep": "10:31",
+    "arr": "17:25",
+    "duration_min": 414,
+    "changes": 1,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "hamburg-hbf",
+      "dep": "10:31",
+      "arr": "11:05",
+      "dep_s": 37860,
+      "arr_s": 39900,
+      "label": "RE3",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "luneburg",
+       "winsen-luhe",
+       "hamburg-harburg-s",
+       "hamburg-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "hamburg-hbf",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "11:33",
+      "arr": "17:25",
+      "dep_s": 41580,
+      "arr_s": 62700,
+      "label": "RJ",
+      "category": "RJ",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_fv",
+       "de_rv"
+      ],
+      "stops": [
+       "hamburg-hbf",
+       "berlin-hbf",
+       "s-sudkreuz-bhf",
+       "dresden-neustadt",
+       "dresden-hbf",
+       "bad-schandau",
+       "schona-gr",
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": [
+       {
+        "at": "decin-hlavni-nadrazi",
+        "label": "RJ",
+        "feed": "de_fv"
+       }
+      ]
+     }
+    ],
+    "notes": [
+     "RJ runs through Děčín hlavní nádraží; the timetable data splits it there, treated here as one train."
+    ]
+   },
+   {
+    "corridor": "hannover-uelzen",
+    "dep": "10:35",
+    "arr": "20:25",
+    "duration_min": 590,
+    "changes": 4,
+    "legs": [
+     {
+      "from": "luneburg",
+      "to": "uelzen",
+      "dep": "10:35",
+      "arr": "10:57",
+      "dep_s": 38100,
+      "arr_s": 39420,
+      "label": "RE3",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "metronom",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "luneburg",
+       "bienenbuttel",
+       "bad-bevensen",
+       "uelzen"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "uelzen",
+      "to": "hannover-hbf",
+      "dep": "11:14",
+      "arr": "12:15",
+      "dep_s": 40440,
+      "arr_s": 44100,
+      "label": "RE2",
+      "category": "RE",
+      "route_type": 2,
+      "long_distance": false,
+      "operator": "DB Regio AG Nord",
+      "feeds": [
+       "de_rv"
+      ],
+      "stops": [
+       "uelzen",
+       "suderburg",
+       "unterluss",
+       "eschede",
+       "celle",
+       "grossburgwedel",
+       "isernhagen",
+       "langenhagen-mitte",
+       "hannover-hbf"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "hannover-hbf",
+      "to": "dresden-neustadt",
+      "dep": "12:37",
+      "arr": "16:42",
+      "dep_s": 45420,
+      "arr_s": 60120,
+      "label": "IC 55",
+      "category": "IC",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "DB Fernverkehr AG",
+      "feeds": [
+       "de_fv"
+      ],
+      "stops": [
+       "hannover-hbf",
+       "braunschweig-hbf",
+       "magdeburg-hbf",
+       "kothen",
+       "halle-saale-hbf",
+       "leipzig-halle-flughafen",
+       "leipzig-hbf",
+       "riesa",
+       "dresden-neustadt"
+      ],
+      "joined_at": []
+     },
+     {
+      "from": "dresden-neustadt",
+      "to": "usti-nad-labem-hlavni-nadrazi",
+      "dep": "17:02",
+      "arr": "18:11",
+      "dep_s": 61320,
+      "arr_s": 65460,
+      "label": "RJ",
+      "category": "RJ",
+      "route_type": 2,
+      "long_distance": true,
+      "operator": "Ceske Drahy",
+      "feeds": [
+       "de_fv",
+       "de_rv"
+      ],
+      "stops": [
+       "dresden-neustadt",
+       "dresden-hbf",
+       "bad-schandau",
+       "schona-gr",
+       "decin-hlavni-nadrazi",
+       "usti-nad-labem-hlavni-nadrazi"
+      ],
+      "joined_at": [
+       {
+        "at": "decin-hlavni-nadrazi",
+        "label": "RJ",
+        "feed": "de_fv"
+       }
+      ]
+     },
+     {
+      "from": "usti-nad-labem-hlavni-nadrazi",
+      "to": "praha-hlavni-nadrazi",
+      "dep": "19:14",
+      "arr": "20:25",
+      "dep_s": 69240,
+      "arr_s": 73500,
+      "label": "R 617",
+      "category": "R",
+      "route_type": 103,
+      "long_distance": false,
+      "operator": "České dráhy, a.s.",
+      "feeds": [
+       "cz_czptt"
+      ],
+      "stops": [
+       "usti-nad-labem-hlavni-nadrazi",
+       "praha-holesovice",
+       "praha-hlavni-nadrazi"
+      ],
+      "joined_at": []
+     }
+    ],
+    "notes": [
+     "RJ runs through Děčín hlavní nádraží; the timetable data splits it there, treated here as one train."
+    ]
+   }
+  ]
+ }
+}

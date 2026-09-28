@@ -147,9 +147,14 @@ def build_document(
     con: duckdb.DuckDBPyConnection,
     fares: FareProvider,
     *,
+    min_change_min: int = 0,
     generated_at: dt.datetime | None = None,
 ) -> dict:
-    """JSON-ready dict for one pair and date."""
+    """JSON-ready dict for one pair and date.
+
+    ``min_change_min`` > 0 marks the document as the comfortable-changes
+    variant searched with that floor on every change.
+    """
     tt = r.tt
     window_h = (r.window[1] - r.window[0]) / 3600
     corridors = []
@@ -261,6 +266,8 @@ def build_document(
         "date": r.date.isoformat(),
         "weekday": r.date.strftime("%A"),
         "window": [hhmm(r.window[0]), hhmm(r.window[1])],
+        "variant": variant_id(min_change_min),
+        "min_change_min": min_change_min,
         "generated_at": (generated_at or dt.datetime.now(dt.UTC)).isoformat(
             timespec="seconds"
         ),
@@ -274,9 +281,15 @@ def build_document(
     }
 
 
+def variant_id(min_change_min: int) -> str:
+    """File/bundle suffix of a search variant: "" or e.g. "c15"."""
+    return f"c{min_change_min}" if min_change_min > 0 else ""
+
+
 def write_json(doc: dict, out_dir: Path) -> Path:
-    """Write ``out/<pair>/<date>.json``."""
-    path = out_dir / doc["pair"]["id"] / f"{doc['date']}.json"
+    """Write ``out/<pair>/<date>.json`` (or ``<date>@<variant>.json``)."""
+    suffix = f"@{doc['variant']}" if doc.get("variant") else ""
+    path = out_dir / doc["pair"]["id"] / f"{doc['date']}{suffix}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
     return path

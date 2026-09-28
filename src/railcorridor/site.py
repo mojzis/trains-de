@@ -8,6 +8,7 @@ from pathlib import Path
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 
+from railcorridor.config import TIGHT_CHANGE_MIN
 from railcorridor.corridors import PALETTE, REGIONAL_COLOR
 
 
@@ -47,18 +48,31 @@ def _script_json(obj: object) -> str:
     return text.replace("</", "<\\/").replace("<!--", "<\\!--")
 
 
+def _doc_key(doc: dict) -> str:
+    return f"{doc['date']}@{doc['variant']}" if doc.get("variant") else doc["date"]
+
+
 def build_site(pair_dir: Path) -> Path:
-    """Render every ``<date>.json`` in ``pair_dir`` into ``index.html``."""
-    files = sorted(pair_dir.glob("????-??-??.json"))
+    """Render every ``<date>[@<variant>].json`` in ``pair_dir`` into ``index.html``."""
+    files = sorted(pair_dir.glob("????-??-??*.json"))
     if not files:
         msg = f"no <date>.json files in {pair_dir}; run query first"
         raise FileNotFoundError(msg)
     docs = [json.loads(f.read_text(encoding="utf-8")) for f in files]
     corridors = unify_colours(docs)
     rivers = json.loads(_asset("assets/rivers.json"))["rivers"]
+    base = [d for d in docs if not d.get("variant")]
+    if not base:
+        msg = f"only variant files in {pair_dir}; run query without --min-change"
+        raise FileNotFoundError(msg)
+    variants = {
+        d["variant"]: d["min_change_min"] for d in docs if d.get("variant")
+    }
     bundle = {
-        "dates": [d["date"] for d in docs],
-        "docs": {d["date"]: d for d in docs},
+        "dates": [d["date"] for d in base],
+        "docs": {_doc_key(d): d for d in docs},
+        "variants": dict(sorted(variants.items(), key=lambda kv: kv[1])),
+        "tight_change_min": TIGHT_CHANGE_MIN,
         "rivers": rivers,
     }
     env = Environment(
@@ -67,10 +81,11 @@ def build_site(pair_dir: Path) -> Path:
         keep_trailing_newline=True,
     )
     tpl = env.get_template("page.html.j2")
-    latest = docs[-1]
+    latest = base[-1]
     html = tpl.render(
         title=latest["pair"]["title"],
         corridors=corridors,
+        tight_change_min=TIGHT_CHANGE_MIN,
         # both are made safe for a <script> body here; the template marks them |safe
         data_json=_script_json(bundle),
         app_js=_asset("static/app.js").replace("</script", "<\\/script"),

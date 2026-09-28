@@ -32,13 +32,19 @@ jobs:
       - name: Build DuckDB
         run: uv run railcorridor build-db -f de_fv -f de_rv -f cz_czptt
 
+      # Results committed under out/ (other dates) are rendered too; these two
+      # are recomputed from the fresh feeds, as timetabled and with every
+      # change at least 15 min.
       - name: Query next Monday and Tuesday
         run: |
           mon=$(date -u -d "next monday" +%F)
           tue=$(date -u -d "$mon + 1 day" +%F)
           for d in "$mon" "$tue"; do
-            uv run railcorridor query --from "Praha hl.n." --to "Lüneburg" \
-              --date "$d" --depart-window 04:00-11:00 --both-directions
+            for mc in 0 15; do
+              uv run railcorridor query --from "Praha hl.n." --to "Lüneburg" \
+                --date "$d" --depart-window 04:00-11:00 --both-directions \
+                --min-change "$mc"
+            done
           done
 
       - name: Render site

@@ -178,6 +178,7 @@ def explore(
     timings["search_s"] = time.perf_counter() - t0
 
     grouped = group(found, tt.names, places, exclude)
+    found_names = {c.name for c in grouped.values() if any(c.journeys.values())}
     chosen_corridors = select(
         grouped,
         ratio=cfg.corridor_ratio,
@@ -193,11 +194,12 @@ def explore(
         present = {c.name for c, _ in chosen[d]}
         for exp in pair.expected:
             if exp["name"] not in present:
-                reason = (
-                    "found only in the other direction"
-                    if exp["name"] in names
-                    else "no journey found in the loaded feeds"
-                )
+                if exp["name"] in names:
+                    reason = "found only in the other direction"
+                elif exp["name"] in found_names:
+                    reason = "found, but much slower than the best corridor"
+                else:
+                    reason = "no journey found in the loaded feeds"
                 missing[d].append({**exp, "reason": reason})
         if not chosen[d]:
             missing[d].append(

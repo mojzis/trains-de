@@ -37,6 +37,14 @@ Options:
 * `query --no-regional` skips the regional-only (Deutschlandticket) search.
 * `query --max-journeys N` caps the journeys per direction (default 12).
 * `query --one-direction` searches outbound only.
+* `query --min-change 15` puts a 15-minute floor on every change and writes
+  `<date>@c15.json`. The page then offers a "Changes ≥ 15 min" toggle next to
+  the timetabled search. Changes under 10 minutes (`TIGHT_CHANGE_MIN`) are
+  drawn orange on the timeline, map and detail panel either way.
+
+Query results in `out/<pair>/*.json` are committed, so dates that have left
+the feeds' window stay viewable. The Pages workflow adds fresh results for the
+next Monday and Tuesday and renders every JSON file it finds.
 
 The gtfs.de feeds cover only about the next 30 days. A date outside the
 window produces a warning on the page, and the missing trains show as
@@ -122,6 +130,8 @@ RAPTOR over the day's trips, restricted to an ellipse around the two cities:
   on (arrival, changes) for each departure in the window.
 * Change times come from `transfers.txt` where present. Otherwise the default
   is 8 min at hubs and 5 min elsewhere (`RoutingConfig`).
+* `min_change_min` (CLI `--min-change`) raises every change time, including
+  `transfers.txt` ones, to at least that many minutes.
 * Border points `(Gr)` are never used for changing.
 * A post-pass moves each change to the best station both trains serve: a hub
   with more slack beats the first possible one, e.g. Hamburg Hbf over

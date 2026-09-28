@@ -1,5 +1,6 @@
 import datetime as dt
 
+from railcorridor.config import RoutingConfig
 from railcorridor.router import pareto
 from tests.conftest import summary
 
@@ -19,6 +20,12 @@ def test_connection_with_too_little_change_time_is_missed(route):
     changed = next(j for j in js if j.changes == 1)
     # 09:04 ICE leaves 4 min after arrival; default change time is 5 min
     assert changed.legs[1].dep == 9 * 3600 + 10 * 60
+
+
+def test_change_time_floor_drops_short_connection(route):
+    # the RE1 -> ICE change at Beta has 10 min; a 15 min floor rules it out
+    js = route("Alpha Hbf", "Gamma Hbf", MON, "08:00", RoutingConfig(min_change_min=15))
+    assert all(j.changes == 0 for j in js)
 
 
 def test_calendar_exception_removes_a_service_day(route):
